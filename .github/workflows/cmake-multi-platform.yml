@@ -35,11 +35,11 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
-          version: '6.5.0'
+          version: '6.6.1'
           host: ${{ matrix.qt_host }}
           arch: ${{ matrix.qt_arch }}
           target: desktop
-          modules: qtbase
+          cache: true
 
       - name: Set build directory
         id: vars
@@ -50,7 +50,6 @@ jobs:
         run: >
           cmake -B ${{ steps.vars.outputs.build_dir }}
           -S ${{ github.workspace }}
-          -DCMAKE_PREFIX_PATH=${{ env.Qt6_DIR }}
           -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
           -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
