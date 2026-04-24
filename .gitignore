@@ -1,0 +1,40 @@
+# Build outputs
+/build/
+/build_*/
+/build*/
+/dist/
+/out/
+/bin/
+/obj/
+/cmake-build-*/
+/CMakeFiles/
+/CMakeCache.txt
+/compile_commands.json
+/Makefile
+/install_manifest.txt
+/QuizApp.app
+/QuizApp.exe
+
+# IDE files
+/.idea/
+/.vscode/
+/.vs/
+/*.user
+/*.pro.user
+/*.vcxproj*
+/*.sln
+
+# macOS
+.DS_Store
+*.app
+
+# Windows
+Thumbs.db
+Desktop.ini
+$null
+
+# Logs and env
+*.log
+*.tmp
+.env
+.env.*
