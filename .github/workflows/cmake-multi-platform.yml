@@ -1,61 +1,60 @@
 name: CMake (Windows & macOS)
 
 on:
-push:
-branches: [ "main" ]
-pull_request:
-branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
-build:
-runs-on: ${{ matrix.os }}
+  build:
+    runs-on: ${{ matrix.os }}
 
-```
-strategy:
-  fail-fast: false
-  matrix:
-    include:
-      - os: windows-latest
-        c_compiler: cl
-        cpp_compiler: cl
-        build_type: Release
-        qt_host: windows
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            c_compiler: cl
+            cpp_compiler: cl
+            build_type: Release
+            qt_host: windows
 
-      - os: macos-latest
-        c_compiler: clang
-        cpp_compiler: clang++
-        build_type: Release
-        qt_host: mac
+          - os: macos-latest
+            c_compiler: clang
+            cpp_compiler: clang++
+            build_type: Release
+            qt_host: mac
 
-steps:
-  - uses: actions/checkout@v4
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-  - name: Install Qt
-    uses: jurplel/install-qt-action@v4
-    with:
-      version: '6.5.0'
-      host: ${{ matrix.qt_host }}
-      target: desktop
-      modules: qtbase
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.5.0'
+          host: ${{ matrix.qt_host }}
+          target: desktop
+          modules: qtbase
 
-  - name: Set build directory
-    id: vars
-    shell: bash
-    run: echo "build_dir=${{ github.workspace }}/build" >> $GITHUB_OUTPUT
+      - name: Set build directory
+        id: vars
+        shell: bash
+        run: echo "build_dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
-  - name: Configure CMake
-    run: >
-      cmake -B ${{ steps.vars.outputs.build_dir }}
-      -S ${{ github.workspace }}
-      -DCMAKE_PREFIX_PATH=${{ env.Qt6_DIR }}
-      -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
-      -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
-      -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+      - name: Configure CMake
+        run: >
+          cmake -B ${{ steps.vars.outputs.build_dir }}
+          -S ${{ github.workspace }}
+          -DCMAKE_PREFIX_PATH=${{ env.Qt6_DIR }}
+          -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
+          -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
 
-  - name: Build
-    run: cmake --build ${{ steps.vars.outputs.build_dir }} --config ${{ matrix.build_type }}
+      - name: Build
+        run: cmake --build ${{ steps.vars.outputs.build_dir }} --config ${{ matrix.build_type }}
 
-  - name: Test
-    working-directory: ${{ steps.vars.outputs.build_dir }}
-    run: ctest --build-config ${{ matrix.build_type }}
-```
+      - name: Test
+        working-directory: ${{ steps.vars.outputs.build_dir }}
+        run: ctest --build-config ${{ matrix.build_type }}
