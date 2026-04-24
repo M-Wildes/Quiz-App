@@ -33,8 +33,7 @@ jobs:
             platform: macos
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
@@ -48,16 +47,15 @@ jobs:
       - name: Configure CMake
         shell: bash
         run: |
-          cmake -B build \
-                -S . \
-                -DCMAKE_C_COMPILER=${{ matrix.c_compiler }} \
-                -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
+          cmake -B build -S . \
+            -DCMAKE_C_COMPILER=${{ matrix.c_compiler }} \
+            -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
 
       - name: Build
         shell: bash
         run: cmake --build build --config Release
 
-      - name: Package build
+      - name: Package
         shell: bash
         run: |
           mkdir -p dist
@@ -66,22 +64,24 @@ jobs:
             EXE=$(find build -name "QuizApp.exe" | head -n 1)
             cp "$EXE" dist/
             windeployqt dist/QuizApp.exe
-          fi
 
-          if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
+          elif [[ "${{ matrix.os }}" == "macos-latest" ]]; then
             APP=$(find build -name "QuizApp.app" | head -n 1)
             cp -R "$APP" dist/
-            chmod +x dist/QuizApp.app/Contents/MacOS/*
           fi
 
-      - name: Create platform-specific zip
+      - name: Create zip (IMPORTANT FIX)
         shell: bash
         run: |
-          cd dist
           if [[ "${{ matrix.platform }}" == "windows" ]]; then
+            cd dist
             zip -r ../QuizApp-windows.zip .
-          elif [[ "${{ matrix.platform }}" == "macos" ]]; then
-            zip -r ../QuizApp-macos.zip .
+          fi
+
+          if [[ "${{ matrix.platform }}" == "macos" ]]; then
+            # ZIP FROM PARENT DIR so .app stays intact
+            cd dist
+            zip -r ../QuizApp-macos.zip QuizApp.app
           fi
 
       - name: Upload artifact
@@ -98,12 +98,11 @@ jobs:
       contents: write
 
     steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v4
         with:
           path: release
 
-      - name: Create GitHub Release
+      - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ github.run_number }}
