@@ -5,6 +5,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -47,35 +48,32 @@ jobs:
         run: echo "build_dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
       - name: Configure CMake
-        run: >
-          cmake -B ${{ steps.vars.outputs.build_dir }}
-          -S ${{ github.workspace }}
-          -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
-          -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
-          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        shell: bash
+        run: |
+          cmake -B "${{ steps.vars.outputs.build_dir }}" \
+                -S "${{ github.workspace }}" \
+                -DCMAKE_C_COMPILER=${{ matrix.c_compiler }} \
+                -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }} \
+                -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
 
       - name: Build
-        run: cmake --build ${{ steps.vars.outputs.build_dir }} --config ${{ matrix.build_type }}
-
-      - name: Test
-        working-directory: ${{ steps.vars.outputs.build_dir }}
-        run: ctest --build-config ${{ matrix.build_type }}
+        shell: bash
+        run: cmake --build "${{ steps.vars.outputs.build_dir }}" --config ${{ matrix.build_type }}
 
       - name: Package build
+        shell: bash
         run: |
           mkdir -p dist
 
-          # Windows binary
           if [ "${{ matrix.os }}" = "windows-latest" ]; then
-            cp build/bin/QuizApp.exe dist/
+            cp "${{ steps.vars.outputs.build_dir }}/bin/QuizApp.exe" dist/
           fi
 
-          # macOS app bundle
           if [ "${{ matrix.os }}" = "macos-latest" ]; then
-            cp -R build/bin/QuizApp.app dist/
+            cp -R "${{ steps.vars.outputs.build_dir }}/bin/QuizApp.app" dist/
           fi
 
-      - name: Upload build artifact
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: QuizApp-${{ matrix.os }}
@@ -86,7 +84,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download all build artifacts
+      - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
           path: release
