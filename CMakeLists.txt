@@ -15,8 +15,6 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC OFF)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Network)
 
 qt_standard_project_setup()
@@ -48,10 +46,16 @@ target_link_libraries(QuizApp
         Qt6::Network
 )
 
-target_compile_definitions(QuizApp
-    PRIVATE
-        QT_NO_CAST_FROM_ASCII
-        QT_NO_CAST_TO_ASCII
+target_compile_definitions(QuizApp PRIVATE
+    QT_NO_CAST_FROM_ASCII
+    QT_NO_CAST_TO_ASCII
+)
+
+#  IMPORTANT: consistent output location across all platforms/configs
+set_target_properties(QuizApp PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/bin"
+    RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/bin"
 )
 
 set_target_properties(QuizApp PROPERTIES
@@ -62,9 +66,7 @@ set_target_properties(QuizApp PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-install(
-    TARGETS QuizApp
+install(TARGETS QuizApp
     BUNDLE DESTINATION .
     RUNTIME DESTINATION bin
 )
-

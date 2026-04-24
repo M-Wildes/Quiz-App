@@ -18,14 +18,12 @@ jobs:
           - os: windows-latest
             c_compiler: cl
             cpp_compiler: cl
-            build_type: Release
             qt_host: windows
             qt_arch: win64_msvc2019_64
 
           - os: macos-latest
             c_compiler: clang
             cpp_compiler: clang++
-            build_type: Release
             qt_host: mac
             qt_arch: clang_64
 
@@ -42,35 +40,32 @@ jobs:
           target: desktop
           cache: true
 
-      - name: Set build directory
-        id: vars
-        shell: bash
-        run: echo "build_dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
-
       - name: Configure CMake
         shell: bash
         run: |
-          cmake -B "${{ steps.vars.outputs.build_dir }}" \
-                -S "${{ github.workspace }}" \
+          cmake -B build \
+                -S . \
                 -DCMAKE_C_COMPILER=${{ matrix.c_compiler }} \
-                -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }} \
-                -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+                -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
 
       - name: Build
         shell: bash
-        run: cmake --build "${{ steps.vars.outputs.build_dir }}" --config ${{ matrix.build_type }}
+        run: cmake --build build --config Release
 
       - name: Package build
         shell: bash
         run: |
           mkdir -p dist
 
-          if [ "${{ matrix.os }}" = "windows-latest" ]; then
-            cp "${{ steps.vars.outputs.build_dir }}/bin/QuizApp.exe" dist/
+          BIN_DIR=$(find build -type f \( -name "QuizApp.exe" -o -name "QuizApp" \) | head -n 1)
+          APP_DIR=$(find build -type d -name "QuizApp.app" | head -n 1)
+
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            cp "$BIN_DIR" dist/
           fi
 
-          if [ "${{ matrix.os }}" = "macos-latest" ]; then
-            cp -R "${{ steps.vars.outputs.build_dir }}/bin/QuizApp.app" dist/
+          if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
+            cp -R "$APP_DIR" dist/
           fi
 
       - name: Upload artifact
