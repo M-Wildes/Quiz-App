@@ -25,7 +25,7 @@ QUrl AppConfig::defaultApiBaseUrl()
         return QUrl(envOverride.trimmed());
     }
 
-    return QUrl(QStringLiteral("http://localhost:3000"));
+    return QUrl(QStringLiteral("https://quizforge.chococookie.org"));
 }
 
 QUrl AppConfig::loadApiBaseUrl()
@@ -49,4 +49,3 @@ void AppConfig::saveApiBaseUrl(const QUrl &url)
     QSettings settings;
     settings.setValue(QStringLiteral("network/apiBaseUrl"), url.toString());
 }
-

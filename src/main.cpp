@@ -11,16 +11,16 @@ namespace {
 QPalette buildPalette()
 {
     QPalette palette;
-    palette.setColor(QPalette::Window, QColor(239, 244, 248));
-    palette.setColor(QPalette::WindowText, QColor(20, 31, 43));
-    palette.setColor(QPalette::Base, QColor(255, 255, 255));
-    palette.setColor(QPalette::AlternateBase, QColor(246, 249, 252));
-    palette.setColor(QPalette::ToolTipBase, QColor(255, 255, 255));
-    palette.setColor(QPalette::ToolTipText, QColor(20, 31, 43));
-    palette.setColor(QPalette::Text, QColor(20, 31, 43));
-    palette.setColor(QPalette::Button, QColor(255, 255, 255));
-    palette.setColor(QPalette::ButtonText, QColor(20, 31, 43));
-    palette.setColor(QPalette::Highlight, QColor(45, 128, 255));
+    palette.setColor(QPalette::Window, QColor(10, 14, 20));
+    palette.setColor(QPalette::WindowText, QColor(235, 241, 248));
+    palette.setColor(QPalette::Base, QColor(20, 28, 39));
+    palette.setColor(QPalette::AlternateBase, QColor(26, 35, 48));
+    palette.setColor(QPalette::ToolTipBase, QColor(18, 24, 34));
+    palette.setColor(QPalette::ToolTipText, QColor(235, 241, 248));
+    palette.setColor(QPalette::Text, QColor(235, 241, 248));
+    palette.setColor(QPalette::Button, QColor(22, 31, 43));
+    palette.setColor(QPalette::ButtonText, QColor(235, 241, 248));
+    palette.setColor(QPalette::Highlight, QColor(97, 188, 255));
     palette.setColor(QPalette::HighlightedText, QColor(255, 255, 255));
     return palette;
 }

@@ -16,6 +16,7 @@ class QLineEdit;
 class QListWidget;
 class QProgressBar;
 class QPushButton;
+class QPropertyAnimation;
 class QSpinBox;
 class QStackedWidget;
 class QTableWidget;
@@ -117,6 +118,7 @@ private:
     void updateQuestionPoolStatus();
     void updateCommunityQuizUi();
     void updateLeaderboardStatus(const QString &message);
+    void animateBattlePassProgress(int targetValue);
     void applyLocalQuizResult(const RecentRun &run);
     void handleLogin();
     void handleSignup();
@@ -204,4 +206,5 @@ private:
     QLabel *m_battlePassProgressLabel = nullptr;
     QProgressBar *m_battlePassProgressBar = nullptr;
     QListWidget *m_battlePassRewardsList = nullptr;
+    QPropertyAnimation *m_battlePassProgressAnimation = nullptr;
 };

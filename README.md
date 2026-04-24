@@ -1,109 +1,28 @@
 # Quiz App
 
-`Quiz App` is the desktop client for your quiz game, built with `C++`, `Qt 6`, and `CMake`.
+`Quiz App` is the desktop client for `QuizForge`, built with `C++`, `Qt 6`, and `CMake`.
 
-The starter scaffold is set up for:
+This repository contains the standalone Windows and macOS desktop experience for the quiz platform. The app is designed to complement the live website rather than mirror it exactly, with its own desktop-focused interface, local quiz flow, and direct integration with the live QuizForge backend.
 
-- Windows and macOS desktop builds
-- a Qt Widgets based UI shell
-- a future shared account flow with the website
-- quiz, profile, leaderboard, battle pass, and settings screens
-- API integration points for login, stats sync, and score uploads
+## What The App Includes
 
-## Why This Stack
+- a Qt Widgets desktop UI
+- local quiz gameplay using a bundled sample question bank
+- account sign-in and sign-up hooks
+- synced stats, leaderboard, and result upload support
+- community quiz browsing and loading
+- desktop-side progression features like XP, recent runs, and battle pass tracking
 
-- `Qt 6` gives you one desktop UI codebase for both Windows and macOS.
-- `CMake` gives you one build system across both platforms.
-- `Qt Network` is enough to integrate with your existing website endpoints.
-- `Qt Widgets` is a good v1 choice because it is faster to build and easier to maintain than a more animated QML UI.
-
-## Project Structure
+## Repo Layout
 
 ```text
-src/
-  main.cpp
-  ui/
-    mainwindow.h
-    mainwindow.cpp
-  network/
-    apiclient.h
-    apiclient.cpp
-  models/
-    playerprofile.h
-    quizresultpayload.h
-  utils/
-    appconfig.h
-    appconfig.cpp
-assets/
-data/
-  sample_questions.json
+src/    application source code
+data/   sample quiz content used by the app
+assets/ placeholder folder for desktop-specific assets
 ```
 
-## Requirements
+## Backend
 
-- `Qt 6.5+`
-- `CMake 3.21+`
-- a C++20 compiler
+By default, the app targets the live QuizForge backend at `https://quizforge.chococookie.org`.
 
-Recommended toolchains:
-
-- Windows: `MSVC 2022`
-- macOS: `Xcode / Apple Clang`
-
-## Build Locally
-
-### Windows
-
-```powershell
-cmake -S . -B build -D CMAKE_PREFIX_PATH="C:\Qt\6.8.0\msvc2022_64"
-cmake --build build --config Release
-```
-
-### macOS
-
-```bash
-cmake -S . -B build -D CMAKE_PREFIX_PATH="$HOME/Qt/6.8.0/macos"
-cmake --build build --config Release
-```
-
-If you use Qt Creator, you can open the folder directly as a CMake project.
-
-## Run
-
-From the build output:
-
-- Windows: `build/bin/QuizApp.exe`
-- macOS: `build/bin/QuizApp.app`
-
-## Website Integration Targets
-
-This app is scaffolded to talk to the website you already built:
-
-- `POST /api/auth/login`
-- `POST /api/auth/signup`
-- `GET /api/me/stats`
-- `GET /api/leaderboard`
-- `POST /api/game/upload-result`
-
-The default API base URL is `http://localhost:3000`.
-
-## Packaging Later
-
-Once the app is compiling, you can package it with:
-
-- `windeployqt` on Windows
-- `macdeployqt` on macOS
-
-Official Qt deployment docs:
-
-- [Windows deployment](https://doc.qt.io/qt-6/windows-deployment.html)
-- [macOS deployment](https://doc.qt.io/qt-6/macos-deployment.html)
-
-## Recommended Next Build Steps
-
-1. Replace placeholder pages with the real quiz loop.
-2. Add login/signup dialogs that call the existing website API.
-3. Add question loading and answer checking.
-4. Upload completed quiz results to the website.
-5. Pull leaderboard and battle pass data into the desktop UI.
-
+If needed for testing, the backend URL can still be overridden through the app settings or the `QUIZFORGE_API_BASE_URL` environment variable.

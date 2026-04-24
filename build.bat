@@ -90,8 +90,8 @@ if not exist "%WINDEPLOYQT%" (
 "%WINDEPLOYQT%" --release "%TEMP_BUILD%\bin\QuizApp.exe"
 if errorlevel 1 exit /b 1
 
-mkdir "%DIST_DIR%"
-if errorlevel 1 if not exist "%DIST_DIR%" exit /b 1
+if not exist "%DIST_DIR%" mkdir "%DIST_DIR%"
+if errorlevel 1 exit /b 1
 
 robocopy "%TEMP_BUILD%\bin" "%DIST_DIR%" /MIR >nul
 if errorlevel 8 exit /b 1
