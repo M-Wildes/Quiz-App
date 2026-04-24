@@ -27,15 +27,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Install Qt (this is the part you were missing)
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.5.0'
+          host: ${{ runner.os }}
+          target: desktop
+          modules: qtbase
+
       - name: Set build directory
         id: vars
-        shell: bash
         run: echo "build_dir=${{ github.workspace }}/build" >> $GITHUB_OUTPUT
 
       - name: Configure CMake
         run: >
           cmake -B ${{ steps.vars.outputs.build_dir }}
           -S ${{ github.workspace }}
+          -DCMAKE_PREFIX_PATH=${{ env.Qt6_DIR }}
           -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
           -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
