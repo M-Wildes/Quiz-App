@@ -33,7 +33,8 @@ jobs:
             platform: macos
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
@@ -47,39 +48,40 @@ jobs:
       - name: Configure CMake
         shell: bash
         run: |
-          cmake -B build -S . \
-            -DCMAKE_C_COMPILER=${{ matrix.c_compiler }} \
-            -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
+          cmake -B build \
+                -S . \
+                -DCMAKE_C_COMPILER=${{ matrix.c_compiler }} \
+                -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
 
       - name: Build
         shell: bash
         run: cmake --build build --config Release
 
-      - name: Package
+      - name: Package build
         shell: bash
         run: |
           mkdir -p dist
 
-          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+          if [[ "${{ matrix.platform }}" == "windows" ]]; then
             EXE=$(find build -name "QuizApp.exe" | head -n 1)
             cp "$EXE" dist/
+
+            # FIX: include Qt runtime DLLs
             windeployqt dist/QuizApp.exe
 
-          elif [[ "${{ matrix.os }}" == "macos-latest" ]]; then
+          elif [[ "${{ matrix.platform }}" == "macos" ]]; then
             APP=$(find build -name "QuizApp.app" | head -n 1)
             cp -R "$APP" dist/
           fi
 
-      - name: Create zip (IMPORTANT FIX)
+      - name: Create zip
         shell: bash
         run: |
           if [[ "${{ matrix.platform }}" == "windows" ]]; then
             cd dist
-            zip -r ../QuizApp-windows.zip .
-          fi
+            powershell -Command "Compress-Archive -Path * -DestinationPath ../QuizApp-windows.zip"
 
-          if [[ "${{ matrix.platform }}" == "macos" ]]; then
-            # ZIP FROM PARENT DIR so .app stays intact
+          elif [[ "${{ matrix.platform }}" == "macos" ]]; then
             cd dist
             zip -r ../QuizApp-macos.zip QuizApp.app
           fi
@@ -98,15 +100,16 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/download-artifact@v4
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
         with:
           path: release
 
-      - name: Create Release
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ github.run_number }}
           name: QuizApp Build ${{ github.run_number }}
-          files: release/**/*.zip
+          files: release/**/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
