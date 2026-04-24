@@ -1,4 +1,4 @@
-name: CMake (Windows & macOS)
+name: CMake (windows & mac)
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
             cpp_compiler: cl
             build_type: Release
 
-          - os: macos-latest
+          - os: mac-latest
             c_compiler: clang
             cpp_compiler: clang++
             build_type: Release
