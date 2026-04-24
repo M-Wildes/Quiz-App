@@ -36,6 +36,7 @@ jobs:
           version: '6.5.0'
           host: ${{ matrix.qt_host }}
           target: desktop
+          arch: win64_msvc2019_64
           modules: qtbase
 
       - name: Set build directory
