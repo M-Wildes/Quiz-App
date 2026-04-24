@@ -19,12 +19,14 @@ jobs:
             cpp_compiler: cl
             build_type: Release
             qt_host: windows
+            qt_arch: win64_msvc2019_64
 
           - os: macos-latest
             c_compiler: clang
             cpp_compiler: clang++
             build_type: Release
             qt_host: mac
+            qt_arch: clang_64
 
     steps:
       - name: Checkout repo
@@ -35,8 +37,8 @@ jobs:
         with:
           version: '6.5.0'
           host: ${{ matrix.qt_host }}
+          arch: ${{ matrix.qt_arch }}
           target: desktop
-          arch: win64_msvc2019_64
           modules: qtbase
 
       - name: Set build directory
