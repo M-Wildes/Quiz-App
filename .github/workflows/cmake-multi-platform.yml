@@ -65,12 +65,12 @@ jobs:
           if [[ "${{ matrix.platform }}" == "windows" ]]; then
             EXE=$(find build -name "QuizApp.exe" | head -n 1)
             cp "$EXE" dist/
-
-            # FIX: include Qt runtime DLLs
             windeployqt dist/QuizApp.exe
 
           elif [[ "${{ matrix.platform }}" == "macos" ]]; then
             APP=$(find build -name "QuizApp.app" | head -n 1)
+            macdeployqt "$APP"
+
             cp -R "$APP" dist/
           fi
 
