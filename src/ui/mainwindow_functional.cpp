@@ -18,6 +18,7 @@
 #include <QJsonParseError>
 #include <QLabel>
 #include <QLineEdit>
+#include <QSizePolicy>
 #include <QListWidget>
 #include <QLocale>
 #include <QMessageBox>
@@ -658,22 +659,22 @@ QWidget *MainWindow::createLandingPage()
 {
     auto *page = new QWidget;
     auto *layout = new QVBoxLayout(page);
-    layout->setContentsMargins(80, 48, 80, 48);
-    layout->setSpacing(24);
+    layout->setContentsMargins(48, 32, 48, 32);
+    layout->setSpacing(0);
 
     layout->addStretch(1);
 
     auto *heroCard = new QFrame;
     heroCard->setObjectName(QStringLiteral("card"));
-    heroCard->setMaximumWidth(760);
+    heroCard->setMaximumWidth(640);
     auto *heroLayout = new QVBoxLayout(heroCard);
-    heroLayout->setContentsMargins(34, 34, 34, 34);
-    heroLayout->setSpacing(18);
+    heroLayout->setContentsMargins(30, 28, 30, 28);
+    heroLayout->setSpacing(14);
 
     heroLayout->addWidget(makeLabel(QStringLiteral("Desktop launch"), QStringLiteral("eyebrow"), false));
 
-    auto *title = new QLabel(QStringLiteral("Welcome to QuizForge Desktop"));
-    title->setObjectName(QStringLiteral("pageTitle"));
+    auto *title = new QLabel(QStringLiteral("Welcome to QuizForge"));
+    title->setObjectName(QStringLiteral("sectionTitle"));
     title->setWordWrap(true);
     heroLayout->addWidget(title);
 
@@ -682,45 +683,70 @@ QWidget *MainWindow::createLandingPage()
         QStringLiteral("bodyCopy")
     ));
 
-    auto *authGrid = new QGridLayout;
-    authGrid->setHorizontalSpacing(16);
-    authGrid->setVerticalSpacing(12);
-
     m_emailEdit = new QLineEdit;
-    m_emailEdit->setObjectName(QStringLiteral("settingsInput"));
     m_emailEdit->setPlaceholderText(QStringLiteral("Email"));
+    m_emailEdit->setFrame(true);
+    m_emailEdit->setFixedHeight(48);
+    m_emailEdit->setMinimumWidth(420);
+    m_emailEdit->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    m_emailEdit->setTextMargins(14, 0, 14, 0);
+    m_emailEdit->setStyleSheet(QStringLiteral(
+        "QLineEdit { background: #182230; border: 1px solid #38506c; border-radius: 8px; color: #ffffff; font-size: 14px; padding: 0px; }"
+        "QLineEdit:focus { border: 2px solid #61bcff; }"
+    ));
 
     m_passwordEdit = new QLineEdit;
-    m_passwordEdit->setObjectName(QStringLiteral("settingsInput"));
     m_passwordEdit->setPlaceholderText(QStringLiteral("Password"));
     m_passwordEdit->setEchoMode(QLineEdit::Password);
+    m_passwordEdit->setFrame(true);
+    m_passwordEdit->setFixedHeight(48);
+    m_passwordEdit->setMinimumWidth(420);
+    m_passwordEdit->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    m_passwordEdit->setTextMargins(14, 0, 14, 0);
+    m_passwordEdit->setStyleSheet(QStringLiteral(
+        "QLineEdit { background: #182230; border: 1px solid #38506c; border-radius: 8px; color: #ffffff; font-size: 14px; padding: 0px; }"
+        "QLineEdit:focus { border: 2px solid #61bcff; }"
+    ));
 
-    authGrid->addWidget(makeLabel(QStringLiteral("Email"), QStringLiteral("bodyCopy"), false), 0, 0);
-    authGrid->addWidget(m_emailEdit, 1, 0);
-    authGrid->addWidget(makeLabel(QStringLiteral("Password"), QStringLiteral("bodyCopy"), false), 0, 1);
-    authGrid->addWidget(m_passwordEdit, 1, 1);
-    heroLayout->addLayout(authGrid);
+    auto *formLayout = new QVBoxLayout;
+    formLayout->setContentsMargins(0, 8, 0, 0);
+    formLayout->setSpacing(0);
 
-    m_landingStatusLabel = makeLabel(
-        QStringLiteral("Log in if you already have an account, create one on the website, or continue as a guest."),
-        QStringLiteral("bodyCopy")
-    );
-    heroLayout->addWidget(m_landingStatusLabel);
+    auto *emailLabel = makeLabel(QStringLiteral("Email"), QStringLiteral("bodyCopy"), false);
+    emailLabel->setFixedHeight(22);
+    auto *passwordLabel = makeLabel(QStringLiteral("Password"), QStringLiteral("bodyCopy"), false);
+    passwordLabel->setFixedHeight(22);
+
+    formLayout->addWidget(emailLabel);
+    formLayout->addSpacing(6);
+    formLayout->addWidget(m_emailEdit);
+    formLayout->addSpacing(18);
+    formLayout->addWidget(passwordLabel);
+    formLayout->addSpacing(6);
+    formLayout->addWidget(m_passwordEdit);
+    heroLayout->addLayout(formLayout);
+    heroLayout->addSpacing(16);
 
     auto *buttonRow = new QHBoxLayout;
-    buttonRow->setContentsMargins(0, 6, 0, 0);
-    buttonRow->setSpacing(12);
+    buttonRow->setContentsMargins(0, 8, 0, 0);
+    buttonRow->setSpacing(10);
 
     auto *loginButton = new QPushButton(QStringLiteral("Login"));
     loginButton->setObjectName(QStringLiteral("primaryButton"));
+    loginButton->setMinimumWidth(90);
+    loginButton->setFixedHeight(42);
     connect(loginButton, &QPushButton::clicked, this, [this] { handleLogin(); });
 
     auto *signupButton = new QPushButton(QStringLiteral("Create Account"));
     signupButton->setObjectName(QStringLiteral("secondaryButton"));
+    signupButton->setMinimumWidth(150);
+    signupButton->setFixedHeight(42);
     connect(signupButton, &QPushButton::clicked, this, [this] { handleSignup(); });
 
     auto *guestButton = new QPushButton(QStringLiteral("Guest Access"));
     guestButton->setObjectName(QStringLiteral("ghostButton"));
+    guestButton->setMinimumWidth(140);
+    guestButton->setFixedHeight(42);
     connect(guestButton, &QPushButton::clicked, this, [this] { continueAsGuest(); });
 
     buttonRow->addWidget(loginButton);
@@ -729,11 +755,11 @@ QWidget *MainWindow::createLandingPage()
     buttonRow->addStretch(1);
     heroLayout->addLayout(buttonRow);
 
-    heroLayout->addWidget(createCard(
-        QStringLiteral("How it works"),
-        QStringLiteral("Menus unlock after login or guest access"),
-        QStringLiteral("The app stays on this screen until you log in or choose guest access. Account creation opens the QuizForge website signup page.")
-    ));
+    auto *unlockHint = makeLabel(
+        QStringLiteral("Menus unlock after login or guest access. Account creation opens the QuizForge website signup page."),
+        QStringLiteral("bodyCopy")
+    );
+    heroLayout->addWidget(unlockHint);
 
     layout->addWidget(heroCard, 0, Qt::AlignHCenter);
     layout->addStretch(1);
@@ -1421,12 +1447,6 @@ void MainWindow::showLandingPage()
         m_rootStack->setCurrentIndex(0);
     }
 
-    if (m_landingStatusLabel != nullptr) {
-        m_landingStatusLabel->setText(
-            QStringLiteral("Log in if you already have an account, create one on the website, or continue as a guest.")
-        );
-    }
-
     statusBar()->showMessage(QStringLiteral("Choose how you want to start."), 3000);
 }
 
@@ -2016,16 +2036,10 @@ void MainWindow::updateProfileUi()
         );
     }
 
-    if (m_playerProfile.signedIn) {
-        if (m_emailEdit != nullptr && m_playerProfile.email != m_emailEdit->text()) {
-            m_emailEdit->setText(m_playerProfile.email);
-        }
-        if (m_displayNameEdit != nullptr && !m_playerProfile.displayName.trimmed().isEmpty()) {
-            m_displayNameEdit->setText(m_playerProfile.displayName);
-        }
-        if (m_usernameEdit != nullptr && !m_playerProfile.username.trimmed().isEmpty()) {
-            m_usernameEdit->setText(m_playerProfile.username);
-        }
+    if (m_playerProfile.signedIn &&
+        m_emailEdit != nullptr &&
+        m_playerProfile.email != m_emailEdit->text()) {
+        m_emailEdit->setText(m_playerProfile.email);
     }
 
     updateApiStatus();
@@ -2270,9 +2284,6 @@ void MainWindow::handleLogin()
     if (m_profileStatusLabel != nullptr) {
         m_profileStatusLabel->setText(QStringLiteral("Signing in..."));
     }
-    if (m_landingStatusLabel != nullptr) {
-        m_landingStatusLabel->setText(QStringLiteral("Signing in..."));
-    }
 
     QNetworkReply *reply = m_apiClient->login(email, password);
 
@@ -2281,9 +2292,7 @@ void MainWindow::handleLogin()
 
         if (reply->error() != QNetworkReply::NoError) {
             m_lastSyncMessage = QStringLiteral("Sign-in failed: %1").arg(extractReplyError(reply, payload));
-            if (m_landingStatusLabel != nullptr) {
-                m_landingStatusLabel->setText(m_lastSyncMessage);
-            }
+            statusBar()->showMessage(m_lastSyncMessage, 5000);
             updateProfileUi();
             reply->deleteLater();
             return;
@@ -2293,9 +2302,7 @@ void MainWindow::handleLogin()
         const QJsonDocument document = QJsonDocument::fromJson(payload, &parseError);
         if (parseError.error != QJsonParseError::NoError || !document.isObject()) {
             m_lastSyncMessage = QStringLiteral("Sign-in failed: invalid server response.");
-            if (m_landingStatusLabel != nullptr) {
-                m_landingStatusLabel->setText(m_lastSyncMessage);
-            }
+            statusBar()->showMessage(m_lastSyncMessage, 5000);
             updateProfileUi();
             reply->deleteLater();
             return;
@@ -2309,9 +2316,7 @@ void MainWindow::handleLogin()
 
         if (accessToken.trimmed().isEmpty()) {
             m_lastSyncMessage = QStringLiteral("Sign-in failed: no access token was returned.");
-            if (m_landingStatusLabel != nullptr) {
-                m_landingStatusLabel->setText(m_lastSyncMessage);
-            }
+            statusBar()->showMessage(m_lastSyncMessage, 5000);
             updateProfileUi();
             reply->deleteLater();
             return;
@@ -2323,15 +2328,11 @@ void MainWindow::handleLogin()
         m_accessToken = accessToken;
         m_playerProfile.signedIn = true;
         m_playerProfile.email = userObject.value(QStringLiteral("email")).toString(email);
-        m_playerProfile.displayName = metadata.value(QStringLiteral("display_name")).toString(
-            m_displayNameEdit != nullptr ? m_displayNameEdit->text().trimmed() : QString()
-        );
+        m_playerProfile.displayName = metadata.value(QStringLiteral("display_name")).toString();
         if (m_playerProfile.displayName.trimmed().isEmpty()) {
             m_playerProfile.displayName = m_playerProfile.email.section(QLatin1Char('@'), 0, 0);
         }
-        m_playerProfile.username = metadata.value(QStringLiteral("username")).toString(
-            m_usernameEdit != nullptr ? m_usernameEdit->text().trimmed() : QString()
-        );
+        m_playerProfile.username = metadata.value(QStringLiteral("username")).toString();
         m_playerProfile.lastSyncedAt = QDateTime::currentDateTime();
         m_lastSyncMessage = QStringLiteral("Signed in. Syncing dashboard data...");
 
@@ -2356,13 +2357,12 @@ void MainWindow::handleSignup()
 {
     const QUrl signupUrl(QStringLiteral("https://quizforge.chococookie.org/signup"));
 
-    if (m_landingStatusLabel != nullptr) {
-        m_landingStatusLabel->setText(QStringLiteral("Opening the QuizForge account creation page..."));
-    }
+    statusBar()->showMessage(QStringLiteral("Opening the QuizForge account creation page..."), 3000);
 
-    if (!QDesktopServices::openUrl(signupUrl) && m_landingStatusLabel != nullptr) {
-        m_landingStatusLabel->setText(
-            QStringLiteral("Open this page to create an account: %1").arg(signupUrl.toString())
+    if (!QDesktopServices::openUrl(signupUrl)) {
+        statusBar()->showMessage(
+            QStringLiteral("Open this page to create an account: %1").arg(signupUrl.toString()),
+            7000
         );
     }
 }

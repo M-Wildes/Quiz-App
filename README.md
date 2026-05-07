@@ -8,7 +8,7 @@ This repository contains the standalone Windows and macOS desktop experience for
 
 - a Qt Widgets desktop UI
 - local quiz gameplay using a bundled sample question bank
-- account sign-in and sign-up hooks
+- account sign-in with website account creation
 - synced stats, leaderboard, and result upload support
 - community quiz browsing and loading
 - desktop-side progression features like XP, recent runs, and battle pass tracking

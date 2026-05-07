@@ -9,7 +9,6 @@
 #include "models/quizresultpayload.h"
 
 class ApiClient;
-class QCheckBox;
 class QComboBox;
 class QLabel;
 class QLineEdit;
@@ -143,7 +142,6 @@ private:
     QLabel *m_pageTitleLabel = nullptr;
     QLabel *m_statusLabel = nullptr;
     QLineEdit *m_apiBaseUrlEdit = nullptr;
-    QLabel *m_landingStatusLabel = nullptr;
 
     QVector<QuizQuestion> m_allQuestions;
     QVector<RecentRun> m_recentRuns;
@@ -203,8 +201,6 @@ private:
     QLabel *m_profileAuthHintLabel = nullptr;
     QLineEdit *m_emailEdit = nullptr;
     QLineEdit *m_passwordEdit = nullptr;
-    QLineEdit *m_displayNameEdit = nullptr;
-    QLineEdit *m_usernameEdit = nullptr;
 
     QLabel *m_leaderboardStatusLabel = nullptr;
     QTableWidget *m_leaderboardTable = nullptr;

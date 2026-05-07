@@ -15,12 +15,6 @@ public:
     void setBaseUrl(const QUrl &baseUrl);
 
     QNetworkReply *login(const QString &email, const QString &password);
-    QNetworkReply *signup(
-        const QString &email,
-        const QString &password,
-        const QString &displayName,
-        const QString &username
-    );
     QNetworkReply *fetchPlayerStats(const QString &accessToken);
     QNetworkReply *fetchCommunityQuizzes();
     QNetworkReply *fetchCommunityQuiz(const QString &slug);
