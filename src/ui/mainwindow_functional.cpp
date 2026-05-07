@@ -135,6 +135,154 @@ bool valueToBool(const QJsonValue &value, bool fallback = false)
     return fallback;
 }
 
+QString playerInitial(const QString &displayName, const QString &username)
+{
+    const QString source = !displayName.trimmed().isEmpty()
+                               ? displayName.trimmed()
+                               : username.trimmed();
+
+    if (source.isEmpty()) {
+        return QStringLiteral("Q");
+    }
+
+    return source.left(1).toUpper();
+}
+
+QString avatarBadgeStyle(const QString &profilePictureKey)
+{
+    if (profilePictureKey == QStringLiteral("profile-flair-badge") ||
+        profilePictureKey == QStringLiteral("cosmetic-avatar-flair")) {
+        return QStringLiteral(
+            "background: qradialgradient(cx:0.68, cy:0.18, radius:0.8, "
+            "stop:0 rgba(255, 208, 138, 0.90), stop:0.26 rgba(88, 214, 200, 0.42), stop:1 rgba(255, 159, 28, 0.28));"
+            "border: 1px solid rgba(255,255,255,0.16);"
+            "border-radius: 18px;"
+            "color: #fff7eb;"
+            "font-size: 24px;"
+            "font-weight: 800;"
+        );
+    }
+
+    return QStringLiteral(
+        "background: qradialgradient(cx:0.34, cy:0.28, radius:0.8, "
+        "stop:0 rgba(255,255,255,0.36), stop:0.32 rgba(255,159,28,0.26), stop:1 rgba(35,64,207,0.24));"
+        "border: 1px solid rgba(255,255,255,0.14);"
+        "border-radius: 18px;"
+        "color: #fff7eb;"
+        "font-size: 24px;"
+        "font-weight: 800;"
+    );
+}
+
+QString avatarFrameStyle(const QString &avatarFrameKey)
+{
+    if (avatarFrameKey == QStringLiteral("arcade-neon-frame") ||
+        avatarFrameKey == QStringLiteral("cosmetic-frame-neon")) {
+        return QStringLiteral(
+            "border: 3px solid rgba(88, 214, 200, 0.72);"
+            "border-radius: 24px;"
+            "background: rgba(88,214,200,0.08);"
+        );
+    }
+
+    if (avatarFrameKey == QStringLiteral("retro-avatar-frame") ||
+        avatarFrameKey == QStringLiteral("cosmetic-frame-retro")) {
+        return QStringLiteral(
+            "border: 3px solid rgba(255,159,28,0.60);"
+            "border-radius: 24px;"
+            "background: rgba(255,159,28,0.08);"
+        );
+    }
+
+    return QStringLiteral(
+        "border: 2px solid rgba(255,255,255,0.14);"
+        "border-radius: 24px;"
+        "background: rgba(255,255,255,0.045);"
+    );
+}
+
+QString playerCardStyle(const QString &hoverAnimationKey)
+{
+    if (hoverAnimationKey == QStringLiteral("spark-hover") ||
+        hoverAnimationKey == QStringLiteral("cosmetic-hover-spark")) {
+        return QStringLiteral(
+            "background: rgba(16,19,31,0.88);"
+            "border: 1px solid rgba(255,159,28,0.34);"
+            "border-radius: 24px;"
+        );
+    }
+
+    if (hoverAnimationKey == QStringLiteral("night-shift-hover") ||
+        hoverAnimationKey == QStringLiteral("cosmetic-hover-night")) {
+        return QStringLiteral(
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 rgba(8,10,18,0.92), stop:1 rgba(88,214,200,0.14));"
+            "border: 1px solid rgba(142,162,255,0.32);"
+            "border-radius: 24px;"
+        );
+    }
+
+    return QStringLiteral(
+        "background: rgba(255,255,255,0.055);"
+        "border: 1px solid rgba(255,255,255,0.10);"
+        "border-radius: 24px;"
+    );
+}
+
+QWidget *makePlayerCardWidget(
+    const QString &name,
+    const QString &username,
+    const QString &title,
+    const QString &avatarClass,
+    const QString &frameClass,
+    const QString &hoverClass,
+    bool compact = false
+)
+{
+    auto *card = new QFrame;
+    card->setStyleSheet(playerCardStyle(hoverClass));
+
+    auto *layout = new QHBoxLayout(card);
+    layout->setContentsMargins(compact ? 10 : 16, compact ? 10 : 16, compact ? 10 : 16, compact ? 10 : 16);
+    layout->setSpacing(compact ? 10 : 14);
+
+    auto *avatarFrame = new QFrame;
+    avatarFrame->setFixedSize(compact ? 58 : 78, compact ? 58 : 78);
+    avatarFrame->setStyleSheet(avatarFrameStyle(frameClass));
+
+    auto *avatarLayout = new QVBoxLayout(avatarFrame);
+    avatarLayout->setContentsMargins(compact ? 6 : 8, compact ? 6 : 8, compact ? 6 : 8, compact ? 6 : 8);
+
+    auto *badge = new QLabel;
+    badge->setAlignment(Qt::AlignCenter);
+    badge->setStyleSheet(avatarBadgeStyle(avatarClass));
+    badge->setText(playerInitial(name, username));
+    avatarLayout->addWidget(badge);
+    layout->addWidget(avatarFrame);
+
+    auto *textLayout = new QVBoxLayout;
+    textLayout->setContentsMargins(0, 0, 0, 0);
+    textLayout->setSpacing(compact ? 2 : 4);
+
+    auto *nameLabel = new QLabel(name.trimmed().isEmpty() ? QStringLiteral("Player") : name);
+    nameLabel->setObjectName(QStringLiteral("playerCardName"));
+    nameLabel->setStyleSheet(compact ? QStringLiteral("font-size: 16px;") : QString());
+
+    auto *titleLabel = new QLabel(title.trimmed().isEmpty() ? QStringLiteral("Quiz Player") : title);
+    titleLabel->setObjectName(QStringLiteral("playerCardTitle"));
+    titleLabel->setStyleSheet(compact ? QStringLiteral("font-size: 10px; letter-spacing: 1px;") : QString());
+
+    auto *metaLabel = new QLabel(username.trimmed().isEmpty() ? QStringLiteral("@player") : QStringLiteral("@%1").arg(username));
+    metaLabel->setObjectName(QStringLiteral("playerCardMeta"));
+    metaLabel->setStyleSheet(compact ? QStringLiteral("font-size: 11px;") : QString());
+
+    textLayout->addWidget(nameLabel);
+    textLayout->addWidget(titleLabel);
+    textLayout->addWidget(metaLabel);
+    layout->addLayout(textLayout, 1);
+
+    return card;
+}
+
 QString extractReplyError(QNetworkReply *reply, const QByteArray &bytes)
 {
     QJsonParseError parseError;
@@ -371,6 +519,15 @@ MainWindow::MainWindow(ApiClient *apiClient, QWidget *parent)
         QLabel#sectionTitle { color: #f6f1e9; font-size: 26px; font-weight: 700; }
         QLabel#bodyCopy { color: #b7ad9f; font-size: 14px; }
         QLabel#metricValue { color: #ffffff; font-size: 30px; font-weight: 700; }
+        QLabel#playerCardName { color: #f6f1e9; font-size: 24px; font-weight: 800; }
+        QLabel#playerCardTitle {
+            color: #ffd08a;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        QLabel#playerCardMeta { color: #b7ad9f; font-size: 13px; }
         QLabel#chip {
             background: rgba(255, 159, 28, 0.16);
             border: 1px solid rgba(255, 159, 28, 0.28);
@@ -799,6 +956,36 @@ QWidget *MainWindow::createDashboardPage()
     m_dashboardSeasonValueLabel = makeLabel(QString(), QStringLiteral("bodyCopy"));
     heroLayout->addWidget(m_dashboardSeasonValueLabel);
 
+    m_dashboardPlayerCard = new QFrame;
+    auto *dashboardCardLayout = new QHBoxLayout(m_dashboardPlayerCard);
+    dashboardCardLayout->setContentsMargins(16, 16, 16, 16);
+    dashboardCardLayout->setSpacing(14);
+
+    m_dashboardAvatarFrame = new QFrame;
+    m_dashboardAvatarFrame->setFixedSize(78, 78);
+    auto *dashboardAvatarLayout = new QVBoxLayout(m_dashboardAvatarFrame);
+    dashboardAvatarLayout->setContentsMargins(8, 8, 8, 8);
+    m_dashboardAvatarBadgeLabel = new QLabel;
+    m_dashboardAvatarBadgeLabel->setAlignment(Qt::AlignCenter);
+    dashboardAvatarLayout->addWidget(m_dashboardAvatarBadgeLabel);
+    dashboardCardLayout->addWidget(m_dashboardAvatarFrame);
+
+    auto *dashboardCardTextLayout = new QVBoxLayout;
+    dashboardCardTextLayout->setContentsMargins(0, 0, 0, 0);
+    dashboardCardTextLayout->setSpacing(4);
+    m_dashboardCardNameLabel = new QLabel;
+    m_dashboardCardNameLabel->setObjectName(QStringLiteral("playerCardName"));
+    m_dashboardCardTitleLabel = new QLabel;
+    m_dashboardCardTitleLabel->setObjectName(QStringLiteral("playerCardTitle"));
+    m_dashboardCardMetaLabel = new QLabel;
+    m_dashboardCardMetaLabel->setObjectName(QStringLiteral("playerCardMeta"));
+    m_dashboardCardMetaLabel->setWordWrap(true);
+    dashboardCardTextLayout->addWidget(m_dashboardCardNameLabel);
+    dashboardCardTextLayout->addWidget(m_dashboardCardTitleLabel);
+    dashboardCardTextLayout->addWidget(m_dashboardCardMetaLabel);
+    dashboardCardLayout->addLayout(dashboardCardTextLayout, 1);
+    heroLayout->addWidget(m_dashboardPlayerCard);
+
     auto *heroButtonRow = new QHBoxLayout;
     heroButtonRow->setContentsMargins(0, 8, 0, 0);
     heroButtonRow->setSpacing(12);
@@ -1189,6 +1376,37 @@ QWidget *MainWindow::createProfilePage()
 
     m_profileStatusLabel = makeLabel(QString(), QStringLiteral("bodyCopy"));
     summaryLayout->addWidget(m_profileStatusLabel);
+
+    m_profilePlayerCard = new QFrame;
+    auto *profileCardLayout = new QHBoxLayout(m_profilePlayerCard);
+    profileCardLayout->setContentsMargins(16, 16, 16, 16);
+    profileCardLayout->setSpacing(14);
+
+    m_profileAvatarFrame = new QFrame;
+    m_profileAvatarFrame->setFixedSize(78, 78);
+    auto *profileAvatarLayout = new QVBoxLayout(m_profileAvatarFrame);
+    profileAvatarLayout->setContentsMargins(8, 8, 8, 8);
+    m_profileAvatarBadgeLabel = new QLabel;
+    m_profileAvatarBadgeLabel->setAlignment(Qt::AlignCenter);
+    profileAvatarLayout->addWidget(m_profileAvatarBadgeLabel);
+    profileCardLayout->addWidget(m_profileAvatarFrame);
+
+    auto *profileCardTextLayout = new QVBoxLayout;
+    profileCardTextLayout->setContentsMargins(0, 0, 0, 0);
+    profileCardTextLayout->setSpacing(4);
+    m_profileCardNameLabel = new QLabel;
+    m_profileCardNameLabel->setObjectName(QStringLiteral("playerCardName"));
+    m_profileCardTitleLabel = new QLabel;
+    m_profileCardTitleLabel->setObjectName(QStringLiteral("playerCardTitle"));
+    m_profileCardMetaLabel = new QLabel;
+    m_profileCardMetaLabel->setObjectName(QStringLiteral("playerCardMeta"));
+    m_profileCardMetaLabel->setWordWrap(true);
+    profileCardTextLayout->addWidget(m_profileCardNameLabel);
+    profileCardTextLayout->addWidget(m_profileCardTitleLabel);
+    profileCardTextLayout->addWidget(m_profileCardMetaLabel);
+    profileCardLayout->addLayout(profileCardTextLayout, 1);
+    summaryLayout->addWidget(m_profilePlayerCard);
+
     layout->addWidget(summaryCard);
 
     auto *authCard = new QFrame;
@@ -1279,6 +1497,7 @@ QWidget *MainWindow::createLeaderboardsPage()
     m_leaderboardTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_leaderboardTable->setSelectionMode(QAbstractItemView::NoSelection);
     m_leaderboardTable->verticalHeader()->hide();
+    m_leaderboardTable->verticalHeader()->setDefaultSectionSize(94);
     m_leaderboardTable->horizontalHeader()->setStretchLastSection(true);
     m_leaderboardTable->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
     m_leaderboardTable->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
@@ -1322,6 +1541,36 @@ QWidget *MainWindow::createBattlePassPage()
 
     m_battlePassProgressLabel = makeLabel(QString(), QStringLiteral("bodyCopy"));
     progressLayout->addWidget(m_battlePassProgressLabel);
+
+    m_battlePassPlayerCard = new QFrame;
+    auto *battlePassCardLayout = new QHBoxLayout(m_battlePassPlayerCard);
+    battlePassCardLayout->setContentsMargins(16, 16, 16, 16);
+    battlePassCardLayout->setSpacing(14);
+
+    m_battlePassAvatarFrame = new QFrame;
+    m_battlePassAvatarFrame->setFixedSize(78, 78);
+    auto *battlePassAvatarLayout = new QVBoxLayout(m_battlePassAvatarFrame);
+    battlePassAvatarLayout->setContentsMargins(8, 8, 8, 8);
+    m_battlePassAvatarBadgeLabel = new QLabel;
+    m_battlePassAvatarBadgeLabel->setAlignment(Qt::AlignCenter);
+    battlePassAvatarLayout->addWidget(m_battlePassAvatarBadgeLabel);
+    battlePassCardLayout->addWidget(m_battlePassAvatarFrame);
+
+    auto *battlePassCardTextLayout = new QVBoxLayout;
+    battlePassCardTextLayout->setContentsMargins(0, 0, 0, 0);
+    battlePassCardTextLayout->setSpacing(4);
+    m_battlePassCardNameLabel = new QLabel;
+    m_battlePassCardNameLabel->setObjectName(QStringLiteral("playerCardName"));
+    m_battlePassCardTitleLabel = new QLabel;
+    m_battlePassCardTitleLabel->setObjectName(QStringLiteral("playerCardTitle"));
+    m_battlePassCardMetaLabel = new QLabel;
+    m_battlePassCardMetaLabel->setObjectName(QStringLiteral("playerCardMeta"));
+    m_battlePassCardMetaLabel->setWordWrap(true);
+    battlePassCardTextLayout->addWidget(m_battlePassCardNameLabel);
+    battlePassCardTextLayout->addWidget(m_battlePassCardTitleLabel);
+    battlePassCardTextLayout->addWidget(m_battlePassCardMetaLabel);
+    battlePassCardLayout->addLayout(battlePassCardTextLayout, 1);
+    progressLayout->addWidget(m_battlePassPlayerCard);
 
     m_battlePassProgressBar = new QProgressBar;
     progressLayout->addWidget(m_battlePassProgressBar);
@@ -2003,6 +2252,7 @@ void MainWindow::updateDashboardUi()
     m_dashboardQuizCountValueLabel->setText(formatNumber(std::max(m_playerProfile.quizzesCompleted, 0)));
 
     updateRecentRunsUi();
+    updatePlayerCardUi();
     updateApiStatus();
 }
 
@@ -2063,6 +2313,76 @@ void MainWindow::updateProfileUi()
     }
 
     updateApiStatus();
+    updatePlayerCardUi();
+}
+
+void MainWindow::updatePlayerCardUi()
+{
+    const QString displayName = !m_playerProfile.displayName.trimmed().isEmpty()
+                                    ? m_playerProfile.displayName.trimmed()
+                                    : QStringLiteral("Local Challenger");
+    const QString username = m_playerProfile.username.trimmed().isEmpty()
+                                 ? QStringLiteral("local")
+                                 : m_playerProfile.username.trimmed();
+    const QString metaText = m_playerProfile.signedIn
+                                 ? QStringLiteral("@%1  |  %2 owned cosmetics  |  %3")
+                                       .arg(username)
+                                       .arg(formatNumber(std::max(m_playerProfile.cosmeticCount, 0)))
+                                       .arg(m_playerProfile.equippedHoverAnimation)
+                                 : QStringLiteral("Guest card  |  sign in to sync website customisation");
+    const QString initial = playerInitial(displayName, username);
+    const QString cardStyle = playerCardStyle(m_playerProfile.equippedHoverAnimation);
+    const QString frameStyle = avatarFrameStyle(m_playerProfile.equippedAvatarFrame);
+    const QString badgeStyle = avatarBadgeStyle(m_playerProfile.equippedProfilePicture);
+
+    const auto applyCard = [&](QFrame *card,
+                               QFrame *avatarFrame,
+                               QLabel *badgeLabel,
+                               QLabel *nameLabel,
+                               QLabel *titleLabel,
+                               QLabel *metaLabel) {
+        if (card == nullptr ||
+            avatarFrame == nullptr ||
+            badgeLabel == nullptr ||
+            nameLabel == nullptr ||
+            titleLabel == nullptr ||
+            metaLabel == nullptr) {
+            return;
+        }
+
+        card->setStyleSheet(cardStyle);
+        avatarFrame->setStyleSheet(frameStyle);
+        badgeLabel->setStyleSheet(badgeStyle);
+        badgeLabel->setText(initial);
+        nameLabel->setText(displayName);
+        titleLabel->setText(m_playerProfile.equippedTitleName);
+        metaLabel->setText(metaText);
+    };
+
+    applyCard(
+        m_dashboardPlayerCard,
+        m_dashboardAvatarFrame,
+        m_dashboardAvatarBadgeLabel,
+        m_dashboardCardNameLabel,
+        m_dashboardCardTitleLabel,
+        m_dashboardCardMetaLabel
+    );
+    applyCard(
+        m_profilePlayerCard,
+        m_profileAvatarFrame,
+        m_profileAvatarBadgeLabel,
+        m_profileCardNameLabel,
+        m_profileCardTitleLabel,
+        m_profileCardMetaLabel
+    );
+    applyCard(
+        m_battlePassPlayerCard,
+        m_battlePassAvatarFrame,
+        m_battlePassAvatarBadgeLabel,
+        m_battlePassCardNameLabel,
+        m_battlePassCardTitleLabel,
+        m_battlePassCardMetaLabel
+    );
 }
 
 void MainWindow::updateBattlePassUi()
@@ -2834,24 +3154,44 @@ void MainWindow::refreshLeaderboard()
             const QString username = entry.value(QStringLiteral("username")).toString(
                 QStringLiteral("Player %1").arg(row + 1)
             );
+            const QJsonObject playerCard = entry.value(QStringLiteral("playerCard")).toObject();
+            const QString cardName = playerCard.value(QStringLiteral("name")).toString(username);
+            const QString cardUsername = playerCard.value(QStringLiteral("username")).toString(username);
+            const QString cardTitle = playerCard.value(QStringLiteral("title")).toString(QStringLiteral("Quiz Player"));
+            const QString avatarClass = playerCard.value(QStringLiteral("avatarClass")).toString(QStringLiteral("cosmetic-avatar-starter"));
+            const QString frameClass = playerCard.value(QStringLiteral("frameClass")).toString(QStringLiteral("cosmetic-frame-clean"));
+            const QString hoverClass = playerCard.value(QStringLiteral("hoverClass")).toString(QStringLiteral("cosmetic-hover-lift"));
             const QString category = entry.value(QStringLiteral("category")).toString(QStringLiteral("General"));
             const int xp = std::max(valueToInt(entry.value(QStringLiteral("xp"))), 0);
             const int score = std::max(valueToInt(entry.value(QStringLiteral("score"))), 0);
 
             auto *rankItem = new QTableWidgetItem(QString::number(rank));
             rankItem->setTextAlignment(Qt::AlignCenter);
-            auto *playerItem = new QTableWidgetItem(username);
             auto *categoryItem = new QTableWidgetItem(category);
+            categoryItem->setTextAlignment(Qt::AlignVCenter);
             auto *xpItem = new QTableWidgetItem(formatNumber(xp));
             xpItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
             auto *scoreItem = new QTableWidgetItem(formatNumber(score));
             scoreItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
             m_leaderboardTable->setItem(row, 0, rankItem);
-            m_leaderboardTable->setItem(row, 1, playerItem);
+            m_leaderboardTable->setCellWidget(
+                row,
+                1,
+                makePlayerCardWidget(
+                    cardName,
+                    cardUsername,
+                    cardTitle,
+                    avatarClass,
+                    frameClass,
+                    hoverClass,
+                    true
+                )
+            );
             m_leaderboardTable->setItem(row, 2, categoryItem);
             m_leaderboardTable->setItem(row, 3, xpItem);
             m_leaderboardTable->setItem(row, 4, scoreItem);
+            m_leaderboardTable->setRowHeight(row, 104);
         }
 
         updateLeaderboardStatus(

@@ -10,6 +10,7 @@
 
 class ApiClient;
 class QComboBox;
+class QFrame;
 class QLabel;
 class QLineEdit;
 class QListWidget;
@@ -115,6 +116,7 @@ private:
     void updateQuizTimer();
     void updateDashboardUi();
     void updateProfileUi();
+    void updatePlayerCardUi();
     void updateBattlePassUi();
     void updateRecentRunsUi();
     void updateQuestionPoolStatus();
@@ -166,6 +168,12 @@ private:
     QLabel *m_dashboardScoreValueLabel = nullptr;
     QLabel *m_dashboardQuizCountValueLabel = nullptr;
     QLabel *m_dashboardSeasonValueLabel = nullptr;
+    QFrame *m_dashboardPlayerCard = nullptr;
+    QFrame *m_dashboardAvatarFrame = nullptr;
+    QLabel *m_dashboardAvatarBadgeLabel = nullptr;
+    QLabel *m_dashboardCardNameLabel = nullptr;
+    QLabel *m_dashboardCardTitleLabel = nullptr;
+    QLabel *m_dashboardCardMetaLabel = nullptr;
     QListWidget *m_dashboardRecentRunsList = nullptr;
 
     QComboBox *m_categoryCombo = nullptr;
@@ -199,6 +207,12 @@ private:
     QLabel *m_profileStatusLabel = nullptr;
     QLabel *m_profileSummaryLabel = nullptr;
     QLabel *m_profileAuthHintLabel = nullptr;
+    QFrame *m_profilePlayerCard = nullptr;
+    QFrame *m_profileAvatarFrame = nullptr;
+    QLabel *m_profileAvatarBadgeLabel = nullptr;
+    QLabel *m_profileCardNameLabel = nullptr;
+    QLabel *m_profileCardTitleLabel = nullptr;
+    QLabel *m_profileCardMetaLabel = nullptr;
     QLineEdit *m_emailEdit = nullptr;
     QLineEdit *m_passwordEdit = nullptr;
 
@@ -208,6 +222,12 @@ private:
     QLabel *m_battlePassSeasonLabel = nullptr;
     QLabel *m_battlePassTierLabel = nullptr;
     QLabel *m_battlePassProgressLabel = nullptr;
+    QFrame *m_battlePassPlayerCard = nullptr;
+    QFrame *m_battlePassAvatarFrame = nullptr;
+    QLabel *m_battlePassAvatarBadgeLabel = nullptr;
+    QLabel *m_battlePassCardNameLabel = nullptr;
+    QLabel *m_battlePassCardTitleLabel = nullptr;
+    QLabel *m_battlePassCardMetaLabel = nullptr;
     QProgressBar *m_battlePassProgressBar = nullptr;
     QListWidget *m_battlePassRewardsList = nullptr;
     QPropertyAnimation *m_battlePassProgressAnimation = nullptr;
