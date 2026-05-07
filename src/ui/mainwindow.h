@@ -80,6 +80,7 @@ private:
     [[nodiscard]] QWidget *createDashboardPage();
     [[nodiscard]] QWidget *createQuizPage();
     [[nodiscard]] QWidget *createCommunityPage();
+    [[nodiscard]] QWidget *createLandingPage();
     [[nodiscard]] QWidget *createProfilePage();
     [[nodiscard]] QWidget *createLeaderboardsPage();
     [[nodiscard]] QWidget *createBattlePassPage();
@@ -92,6 +93,8 @@ private:
     ) const;
     [[nodiscard]] QPushButton *createNavButton(const QString &text, int index);
 
+    void showLandingPage();
+    void showMainShell(int pageIndex = DashboardPage);
     void setCurrentPage(int index);
     void loadQuestions();
     void populateQuestionFilters();
@@ -123,6 +126,7 @@ private:
     void handleLogin();
     void handleSignup();
     void handleLogout();
+    void continueAsGuest();
     void refreshRemoteStats();
     void refreshCommunityQuizzes();
     void loadCommunityQuiz(const QString &slug, bool startImmediately = false);
@@ -133,10 +137,13 @@ private:
     [[nodiscard]] int computedNextBattlePassXp() const;
 
     ApiClient *m_apiClient = nullptr;
+    QStackedWidget *m_rootStack = nullptr;
+    QWidget *m_mainShellPage = nullptr;
     QStackedWidget *m_pageStack = nullptr;
     QLabel *m_pageTitleLabel = nullptr;
     QLabel *m_statusLabel = nullptr;
     QLineEdit *m_apiBaseUrlEdit = nullptr;
+    QLabel *m_landingStatusLabel = nullptr;
 
     QVector<QuizQuestion> m_allQuestions;
     QVector<RecentRun> m_recentRuns;
@@ -193,6 +200,7 @@ private:
 
     QLabel *m_profileStatusLabel = nullptr;
     QLabel *m_profileSummaryLabel = nullptr;
+    QLabel *m_profileAuthHintLabel = nullptr;
     QLineEdit *m_emailEdit = nullptr;
     QLineEdit *m_passwordEdit = nullptr;
     QLineEdit *m_displayNameEdit = nullptr;
