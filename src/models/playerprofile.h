@@ -17,6 +17,12 @@ struct PlayerProfile
     int nextBattlePassXp = 200;
     int currentStreak = 0;
     int accuracy = 0;
+    QString equippedProfilePicture = QStringLiteral("starter-badge");
+    QString equippedAvatarFrame = QStringLiteral("clean-frame");
+    QString equippedTitle = QStringLiteral("quiz-player");
+    QString equippedTitleName = QStringLiteral("Quiz Player");
+    QString equippedHoverAnimation = QStringLiteral("soft-lift");
+    int cosmeticCount = 0;
     bool signedIn = false;
     QDateTime lastSyncedAt;
 };

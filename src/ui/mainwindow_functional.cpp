@@ -1983,14 +1983,17 @@ void MainWindow::updateDashboardUi()
                                           ? m_playerProfile.username
                                           : QStringLiteral("Local Challenger"));
 
-    m_dashboardWelcomeLabel->setText(QStringLiteral("Welcome back, %1").arg(playerName));
+    m_dashboardWelcomeLabel->setText(
+        QStringLiteral("Welcome back, %1").arg(playerName)
+    );
 
     m_dashboardSeasonValueLabel->setText(
         m_playerProfile.signedIn
-            ? QStringLiteral("%1  |  %2 days left  |  %3")
+            ? QStringLiteral("%1  |  %2 days left  |  %3  |  Title: %4")
                   .arg(m_seasonName)
                   .arg(m_daysLeftInSeason)
                   .arg(m_lastSyncMessage)
+                  .arg(m_playerProfile.equippedTitleName)
             : QStringLiteral("Guest mode is active. Your runs still earn local XP and season progress.")
     );
 
@@ -2018,12 +2021,13 @@ void MainWindow::updateProfileUi()
 
     if (m_playerProfile.signedIn) {
         m_profileSummaryLabel->setText(
-            QStringLiteral("%1  |  %2  |  Level %3  |  %4 XP  |  %5 quizzes")
+            QStringLiteral("%1  |  %2  |  %3  |  Level %4  |  %5 XP  |  %6 cosmetics")
                 .arg(displayName)
                 .arg(usernameText)
+                .arg(m_playerProfile.equippedTitleName)
                 .arg(m_playerProfile.level)
                 .arg(formatNumber(m_playerProfile.totalXp))
-                .arg(formatNumber(m_playerProfile.quizzesCompleted))
+                .arg(formatNumber(m_playerProfile.cosmeticCount))
         );
     } else {
         m_profileSummaryLabel->setText(
@@ -2036,6 +2040,11 @@ void MainWindow::updateProfileUi()
     if (m_playerProfile.lastSyncedAt.isValid()) {
         statusText += QStringLiteral(" Last update: %1.")
                           .arg(m_playerProfile.lastSyncedAt.toString(QStringLiteral("dd MMM HH:mm")));
+    }
+    if (m_playerProfile.signedIn) {
+        statusText += QStringLiteral(" Equipped frame: %1. Hover effect: %2.")
+                          .arg(m_playerProfile.equippedAvatarFrame)
+                          .arg(m_playerProfile.equippedHoverAnimation);
     }
     m_profileStatusLabel->setText(statusText);
 
@@ -2388,6 +2397,12 @@ void MainWindow::handleLogout()
     m_playerProfile.signedIn = false;
     m_playerProfile.email.clear();
     m_playerProfile.lastSyncedAt = {};
+    m_playerProfile.equippedProfilePicture = QStringLiteral("starter-badge");
+    m_playerProfile.equippedAvatarFrame = QStringLiteral("clean-frame");
+    m_playerProfile.equippedTitle = QStringLiteral("quiz-player");
+    m_playerProfile.equippedTitleName = QStringLiteral("Quiz Player");
+    m_playerProfile.equippedHoverAnimation = QStringLiteral("soft-lift");
+    m_playerProfile.cosmeticCount = 0;
     m_lastSyncMessage = QStringLiteral("Guest mode");
 
     if (m_quizUploadStatusLabel != nullptr && m_hasPendingUpload) {
@@ -2407,6 +2422,12 @@ void MainWindow::continueAsGuest()
     m_playerProfile.signedIn = false;
     m_playerProfile.email.clear();
     m_playerProfile.lastSyncedAt = {};
+    m_playerProfile.equippedProfilePicture = QStringLiteral("starter-badge");
+    m_playerProfile.equippedAvatarFrame = QStringLiteral("clean-frame");
+    m_playerProfile.equippedTitle = QStringLiteral("quiz-player");
+    m_playerProfile.equippedTitleName = QStringLiteral("Quiz Player");
+    m_playerProfile.equippedHoverAnimation = QStringLiteral("soft-lift");
+    m_playerProfile.cosmeticCount = 0;
     m_lastSyncMessage = QStringLiteral("Guest mode");
 
     updateDashboardUi();
@@ -2481,6 +2502,36 @@ void MainWindow::refreshRemoteStats()
             m_playerProfile.battlePassXp = std::max(m_playerProfile.battlePassXp, m_playerProfile.totalXp);
             m_playerProfile.battlePassTier = std::max((m_playerProfile.battlePassXp / 200) + 1, 1);
             m_playerProfile.nextBattlePassXp = std::max(m_playerProfile.battlePassTier * 200, 200);
+        }
+
+        const QJsonObject customization = root.value(QStringLiteral("customization")).toObject();
+        if (!customization.isEmpty()) {
+            const QJsonObject equipped = customization.value(QStringLiteral("equipped")).toObject();
+            m_playerProfile.equippedProfilePicture = equipped
+                .value(QStringLiteral("profile_picture"))
+                .toString(m_playerProfile.equippedProfilePicture);
+            m_playerProfile.equippedAvatarFrame = equipped
+                .value(QStringLiteral("avatar_frame"))
+                .toString(m_playerProfile.equippedAvatarFrame);
+            m_playerProfile.equippedTitle = equipped
+                .value(QStringLiteral("title"))
+                .toString(m_playerProfile.equippedTitle);
+            m_playerProfile.equippedHoverAnimation = equipped
+                .value(QStringLiteral("hover_animation"))
+                .toString(m_playerProfile.equippedHoverAnimation);
+
+            const QJsonArray inventory = customization.value(QStringLiteral("inventory")).toArray();
+            m_playerProfile.cosmeticCount = inventory.size();
+            for (const auto &itemValue : inventory) {
+                const QJsonObject item = itemValue.toObject();
+                if (item.value(QStringLiteral("key")).toString() == m_playerProfile.equippedTitle) {
+                    const QString titleName = item.value(QStringLiteral("name")).toString();
+                    if (!titleName.trimmed().isEmpty()) {
+                        m_playerProfile.equippedTitleName = titleName;
+                    }
+                    break;
+                }
+            }
         }
 
         if (!m_hasPendingUpload) {
