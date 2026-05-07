@@ -32,26 +32,6 @@ QNetworkReply *ApiClient::login(const QString &email, const QString &password)
     );
 }
 
-QNetworkReply *ApiClient::signup(
-    const QString &email,
-    const QString &password,
-    const QString &displayName,
-    const QString &username
-)
-{
-    const QJsonObject body{
-        {QStringLiteral("email"), email},
-        {QStringLiteral("password"), password},
-        {QStringLiteral("displayName"), displayName},
-        {QStringLiteral("username"), username},
-    };
-
-    return m_network.post(
-        makeJsonRequest(QStringLiteral("/api/auth/signup")),
-        QJsonDocument(body).toJson(QJsonDocument::Compact)
-    );
-}
-
 QNetworkReply *ApiClient::fetchPlayerStats(const QString &accessToken)
 {
     return m_network.get(makeJsonRequest(QStringLiteral("/api/me/stats"), accessToken));

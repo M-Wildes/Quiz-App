@@ -34,6 +34,8 @@ qt_add_executable(QuizApp
     src/utils/appconfig.h
     src/utils/questionbank.cpp
     src/utils/questionbank.h
+    assets/resources.qrc
+    assets/app_icon.rc
 )
 
 target_include_directories(QuizApp PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)

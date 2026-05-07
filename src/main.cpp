@@ -1,5 +1,6 @@
 #include <QApplication>
 #include <QFont>
+#include <QIcon>
 #include <QPalette>
 
 #include "network/apiclient.h"
@@ -36,9 +37,11 @@ int main(int argc, char *argv[])
     app.setStyle(QStringLiteral("Fusion"));
     app.setPalette(buildPalette());
     app.setFont(QFont(QStringLiteral("Segoe UI"), 10));
+    app.setWindowIcon(QIcon(QStringLiteral(":/app.ico")));
 
     ApiClient apiClient(AppConfig::loadApiBaseUrl());
     MainWindow window(&apiClient);
+    window.setWindowIcon(app.windowIcon());
     window.show();
 
     return app.exec();
