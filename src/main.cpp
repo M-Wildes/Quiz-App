@@ -11,6 +11,7 @@ namespace {
 
 QPalette buildPalette()
 {
+    // Keep the dark palette centralized so the whole widgets app picks up the same base theme.
     QPalette palette;
     palette.setColor(QPalette::Window, QColor(10, 14, 20));
     palette.setColor(QPalette::WindowText, QColor(235, 241, 248));

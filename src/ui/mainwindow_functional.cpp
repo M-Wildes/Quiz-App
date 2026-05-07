@@ -207,6 +207,7 @@ int calculateScore(const QString &difficulty, int correctAnswers, int totalQuest
     const int clampedCorrect = std::clamp(correctAnswers, 0, questionCount);
     const double accuracyRatio = static_cast<double>(clampedCorrect) / questionCount;
 
+    // Score rewards both raw correct answers and overall accuracy so short and long runs scale consistently.
     return static_cast<int>(std::round(
         clampedCorrect * 100.0 * scoreMultiplierForDifficulty(difficulty) +
         accuracyRatio * 250.0
@@ -225,6 +226,7 @@ int calculateXp(
     const int clampedCorrect = std::clamp(correctAnswers, 0, questionCount);
     const double accuracyRatio = static_cast<double>(clampedCorrect) / questionCount;
 
+    // XP is intentionally softer than score: everyone progresses, but stronger runs still move further.
     int xpEarned = 50 +
                    static_cast<int>(std::round(accuracyRatio * 60.0)) +
                    xpBonusForDifficulty(difficulty);
@@ -322,6 +324,7 @@ QVector<BattlePassReward> rewardTrack()
 
 } // namespace
 
+// Main window startup and shared styling
 MainWindow::MainWindow(ApiClient *apiClient, QWidget *parent)
     : QMainWindow(parent)
     , m_apiClient(apiClient)
@@ -549,6 +552,7 @@ MainWindow::MainWindow(ApiClient *apiClient, QWidget *parent)
     rootLayout->setContentsMargins(24, 24, 24, 24);
     rootLayout->setSpacing(0);
 
+    // The root stack keeps the first-launch welcome/auth flow separate from the main in-app shell.
     m_rootStack = new QStackedWidget;
     rootLayout->addWidget(m_rootStack, 1);
 
@@ -656,6 +660,7 @@ MainWindow::MainWindow(ApiClient *apiClient, QWidget *parent)
     statusBar()->showMessage(QStringLiteral("Choose how you want to start."), 3000);
 }
 
+// Page construction
 QWidget *MainWindow::createLandingPage()
 {
     auto *page = new QWidget;
@@ -1442,6 +1447,7 @@ QPushButton *MainWindow::createNavButton(const QString &text, int index)
     return button;
 }
 
+// Shell and page routing
 void MainWindow::showLandingPage()
 {
     if (m_rootStack != nullptr) {
@@ -1546,6 +1552,7 @@ void MainWindow::updateApiStatus()
     m_statusLabel->setText(QStringLiteral("%1 | %2").arg(syncState, targetState));
 }
 
+// Quiz setup and gameplay flow
 void MainWindow::updateQuizTimer()
 {
     if (m_quizTimerLabel == nullptr) {
@@ -1772,6 +1779,8 @@ void MainWindow::showCurrentQuestion()
             button->setEnabled(false);
 
             QPointer<QPushButton> safeButton(button);
+            // Staggered reveal adds motion without using opacity/graphics effects,
+            // which were unstable in this app on some machines.
             QTimer::singleShot(50 + (index * 70), this, [this, safeButton, currentQuestionIndex] {
                 if (safeButton.isNull() ||
                     !m_quizSession.active ||
@@ -1961,6 +1970,7 @@ void MainWindow::resetAnswerButtons()
     }
 }
 
+// Dashboard, profile, and progression UI refresh
 void MainWindow::updateDashboardUi()
 {
     if (m_dashboardWelcomeLabel == nullptr) {
@@ -2080,6 +2090,7 @@ void MainWindow::updateBattlePassUi()
             .arg(formatNumber(currentXp - floorXp))
             .arg(formatNumber(tierSpan))
     );
+    // Animate the progress bar's built-in value property instead of layering custom effects onto the widget.
     animateBattlePassProgress(tierProgress);
 
     m_battlePassRewardsList->clear();
@@ -2178,6 +2189,7 @@ void MainWindow::updateRecentRunsUi()
     }
 }
 
+// Supporting lists and cards
 void MainWindow::updateCommunityQuizUi()
 {
     if (m_communityQuizTitleLabel == nullptr ||
@@ -2229,6 +2241,7 @@ void MainWindow::updateLeaderboardStatus(const QString &message)
     }
 }
 
+// Result aggregation and account entry points
 void MainWindow::applyLocalQuizResult(const RecentRun &run)
 {
     const int previousRuns = std::max(m_playerProfile.quizzesCompleted, 0);
@@ -2358,6 +2371,7 @@ void MainWindow::handleSignup()
 {
     const QUrl signupUrl(QStringLiteral("https://quizforge.chococookie.org/signup"));
 
+    // Account creation is delegated to the live website so the app stays aligned with the web auth flow.
     statusBar()->showMessage(QStringLiteral("Opening the QuizForge account creation page..."), 3000);
 
     if (!QDesktopServices::openUrl(signupUrl)) {
@@ -2400,6 +2414,7 @@ void MainWindow::continueAsGuest()
     showMainShell(DashboardPage);
 }
 
+// Remote sync, community content, and uploads
 void MainWindow::refreshRemoteStats()
 {
     if (m_apiClient == nullptr) {
@@ -2875,6 +2890,7 @@ int MainWindow::currentBattlePassFloorXp() const
     return std::max((std::max(m_playerProfile.battlePassTier, 1) - 1) * 200, 0);
 }
 
+// Battle pass progression math helpers
 int MainWindow::computedNextBattlePassXp() const
 {
     return std::max(

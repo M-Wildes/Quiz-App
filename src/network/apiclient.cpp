@@ -4,6 +4,7 @@
 #include <QJsonObject>
 #include <QNetworkRequest>
 
+// Core client state
 ApiClient::ApiClient(QUrl baseUrl)
     : m_baseUrl(baseUrl)
 {
@@ -19,6 +20,7 @@ void ApiClient::setBaseUrl(const QUrl &baseUrl)
     m_baseUrl = baseUrl;
 }
 
+// Auth and read/write API calls
 QNetworkReply *ApiClient::login(const QString &email, const QString &password)
 {
     const QJsonObject body{
@@ -66,8 +68,10 @@ QNetworkReply *ApiClient::uploadQuizResult(
     );
 }
 
+// Shared request construction
 QUrl ApiClient::endpoint(const QString &path) const
 {
+    // Every request is built from the currently selected backend root so local/live switching stays centralized.
     QUrl url = m_baseUrl;
     url.setPath(path);
     return url;

@@ -10,11 +10,14 @@
 
 namespace {
 
+// File discovery helpers
 QStringList candidatePaths()
 {
     const QString appDir = QCoreApplication::applicationDirPath();
     const QString currentDir = QDir::currentPath();
 
+    // Packaged builds and local runs resolve data files from different working directories,
+    // so we probe a small set of likely relative paths instead of assuming one layout.
     return {
         QDir(appDir).filePath(QStringLiteral("data/sample_questions.json")),
         QDir(appDir).filePath(QStringLiteral("../data/sample_questions.json")),
@@ -41,6 +44,7 @@ QStringList readAnswers(const QJsonArray &array)
 
 } // namespace
 
+// Question bank loading
 QVector<QuizQuestion> QuestionBank::loadFromDefaultLocation(QString *errorMessage)
 {
     return loadFromFile(resolveDefaultQuestionPath(), errorMessage);
@@ -89,6 +93,7 @@ QVector<QuizQuestion> QuestionBank::loadFromFile(
         question.explanation = object.value(QStringLiteral("explanation")).toString();
 
         if (question.isValid()) {
+            // Invalid entries are skipped so a few broken rows do not take down the whole bank.
             questions.push_back(question);
         }
     }
@@ -101,6 +106,7 @@ QVector<QuizQuestion> QuestionBank::loadFromFile(
     return questions;
 }
 
+// Question bank lookup helpers
 QString QuestionBank::resolveDefaultQuestionPath()
 {
     for (const auto &path : candidatePaths()) {
