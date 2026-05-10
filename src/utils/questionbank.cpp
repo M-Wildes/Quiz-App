@@ -19,6 +19,7 @@ QStringList candidatePaths()
     // Packaged builds and local runs resolve data files from different working directories,
     // so we probe a small set of likely relative paths instead of assuming one layout.
     return {
+        QStringLiteral(":/data/sample_questions.json"),
         QDir(appDir).filePath(QStringLiteral("data/sample_questions.json")),
         QDir(appDir).filePath(QStringLiteral("../data/sample_questions.json")),
         QDir(appDir).filePath(QStringLiteral("../../data/sample_questions.json")),

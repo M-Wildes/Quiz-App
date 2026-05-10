@@ -28,6 +28,11 @@ QUrl AppConfig::defaultApiBaseUrl()
     return QUrl(QStringLiteral("https://quizforge.chococookie.org"));
 }
 
+QUrl AppConfig::fallbackApiBaseUrl()
+{
+    return QUrl(QStringLiteral("https://quiz-game-site.vercel.app/"));
+}
+
 QUrl AppConfig::loadApiBaseUrl()
 {
     QSettings settings;

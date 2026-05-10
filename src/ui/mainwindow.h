@@ -17,6 +17,7 @@ class QListWidget;
 class QProgressBar;
 class QPushButton;
 class QPropertyAnimation;
+class QNetworkReply;
 class QSpinBox;
 class QStackedWidget;
 class QTableWidget;
@@ -113,6 +114,7 @@ private:
     void resetAnswerButtons();
     void saveApiBaseUrl();
     void updateApiStatus();
+    bool switchToFallbackApi(const QNetworkReply *reply);
     void updateQuizTimer();
     void updateDashboardUi();
     void updateProfileUi();

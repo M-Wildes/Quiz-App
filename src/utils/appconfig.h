@@ -10,7 +10,7 @@ public:
     static QString applicationDisplayName();
 
     static QUrl defaultApiBaseUrl();
+    static QUrl fallbackApiBaseUrl();
     static QUrl loadApiBaseUrl();
     static void saveApiBaseUrl(const QUrl &url);
 };
-

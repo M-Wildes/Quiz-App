@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>app.ico</file>
+        <file alias="data/sample_questions.json">../data/sample_questions.json</file>
     </qresource>
 </RCC>

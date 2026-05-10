@@ -107,6 +107,14 @@ bool isLocalUrl(const QUrl &url)
            host == QStringLiteral("127.0.0.1");
 }
 
+bool isPrimaryQuizForgeUrl(const QUrl &url)
+{
+    return url.host().trimmed().compare(
+               QStringLiteral("quizforge.chococookie.org"),
+               Qt::CaseInsensitive
+           ) == 0;
+}
+
 int valueToInt(const QJsonValue &value, int fallback = 0)
 {
     if (value.isDouble()) {
@@ -155,7 +163,7 @@ QString avatarBadgeStyle(const QString &profilePictureKey)
         return QStringLiteral(
             "background: qradialgradient(cx:0.68, cy:0.18, radius:0.8, "
             "stop:0 rgba(255, 208, 138, 0.90), stop:0.26 rgba(88, 214, 200, 0.42), stop:1 rgba(255, 159, 28, 0.28));"
-            "border: 1px solid rgba(255,255,255,0.16);"
+            "border: 0px solid transparent;"
             "border-radius: 18px;"
             "color: #fff7eb;"
             "font-size: 24px;"
@@ -166,7 +174,7 @@ QString avatarBadgeStyle(const QString &profilePictureKey)
     return QStringLiteral(
         "background: qradialgradient(cx:0.34, cy:0.28, radius:0.8, "
         "stop:0 rgba(255,255,255,0.36), stop:0.32 rgba(255,159,28,0.26), stop:1 rgba(35,64,207,0.24));"
-        "border: 1px solid rgba(255,255,255,0.14);"
+        "border: 0px solid transparent;"
         "border-radius: 18px;"
         "color: #fff7eb;"
         "font-size: 24px;"
@@ -179,7 +187,7 @@ QString avatarFrameStyle(const QString &avatarFrameKey)
     if (avatarFrameKey == QStringLiteral("arcade-neon-frame") ||
         avatarFrameKey == QStringLiteral("cosmetic-frame-neon")) {
         return QStringLiteral(
-            "border: 3px solid rgba(88, 214, 200, 0.72);"
+            "border: 2px solid rgba(88, 214, 200, 0.42);"
             "border-radius: 24px;"
             "background: rgba(88,214,200,0.08);"
         );
@@ -188,14 +196,14 @@ QString avatarFrameStyle(const QString &avatarFrameKey)
     if (avatarFrameKey == QStringLiteral("retro-avatar-frame") ||
         avatarFrameKey == QStringLiteral("cosmetic-frame-retro")) {
         return QStringLiteral(
-            "border: 3px solid rgba(255,159,28,0.60);"
+            "border: 2px solid rgba(255,159,28,0.36);"
             "border-radius: 24px;"
             "background: rgba(255,159,28,0.08);"
         );
     }
 
     return QStringLiteral(
-        "border: 2px solid rgba(255,255,255,0.14);"
+        "border: 1px solid rgba(255,255,255,0.08);"
         "border-radius: 24px;"
         "background: rgba(255,255,255,0.045);"
     );
@@ -207,7 +215,7 @@ QString playerCardStyle(const QString &hoverAnimationKey)
         hoverAnimationKey == QStringLiteral("cosmetic-hover-spark")) {
         return QStringLiteral(
             "background: rgba(16,19,31,0.88);"
-            "border: 1px solid rgba(255,159,28,0.34);"
+            "border: 1px solid rgba(255,159,28,0.18);"
             "border-radius: 24px;"
         );
     }
@@ -216,14 +224,14 @@ QString playerCardStyle(const QString &hoverAnimationKey)
         hoverAnimationKey == QStringLiteral("cosmetic-hover-night")) {
         return QStringLiteral(
             "background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 rgba(8,10,18,0.92), stop:1 rgba(88,214,200,0.14));"
-            "border: 1px solid rgba(142,162,255,0.32);"
+            "border: 1px solid rgba(142,162,255,0.18);"
             "border-radius: 24px;"
         );
     }
 
     return QStringLiteral(
         "background: rgba(255,255,255,0.055);"
-        "border: 1px solid rgba(255,255,255,0.10);"
+        "border: 1px solid rgba(255,255,255,0.06);"
         "border-radius: 24px;"
     );
 }
@@ -549,36 +557,58 @@ MainWindow::MainWindow(ApiClient *apiClient, QWidget *parent)
         QComboBox,
         QSpinBox {
             background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.13);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
             color: #f6f1e9;
             font-size: 14px;
             min-height: 20px;
             padding: 10px 12px;
+            outline: none;
         }
         QLineEdit#settingsInput:focus,
         QComboBox:focus,
         QSpinBox:focus {
-            border: 1px solid #ff9f1c;
+            border: 1px solid rgba(255, 159, 28, 0.24);
+            outline: none;
+        }
+        QComboBox::drop-down {
+            border: none;
+            width: 28px;
+        }
+        QComboBox QAbstractItemView {
+            background: #101322;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            color: #f6f1e9;
+            outline: none;
+            selection-background-color: rgba(255, 159, 28, 0.16);
+            selection-color: #ffffff;
         }
         QListWidget,
         QTableWidget {
             background: rgba(16, 19, 31, 0.92);
-            border: 1px solid rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 18px;
             color: #f6f1e9;
             font-size: 13px;
             padding: 6px;
             gridline-color: rgba(255, 255, 255, 0.10);
+            outline: none;
         }
         QListWidget::item {
             border-radius: 12px;
+            border: 1px solid transparent;
             margin: 2px 0;
             padding: 8px;
         }
         QListWidget::item:selected {
             background: rgba(255, 159, 28, 0.16);
+            border: 1px solid transparent;
             color: #ffffff;
+        }
+        QListWidget::item:focus,
+        QListWidget::item:selected:focus {
+            outline: none;
         }
         QTableWidget::item { padding: 8px; }
         QHeaderView::section {
@@ -1797,8 +1827,56 @@ void MainWindow::updateApiStatus()
                                          : QStringLiteral("Guest mode"));
     const QString targetState = isLocalUrl(url)
                                     ? QStringLiteral("local website")
-                                    : QStringLiteral("live website");
+                                    : (url.host().compare(
+                                           AppConfig::fallbackApiBaseUrl().host(),
+                                           Qt::CaseInsensitive
+                                       ) == 0
+                                           ? QStringLiteral("fallback website")
+                                           : QStringLiteral("live website"));
     m_statusLabel->setText(QStringLiteral("%1 | %2").arg(syncState, targetState));
+}
+
+bool MainWindow::switchToFallbackApi(const QNetworkReply *reply)
+{
+    if (m_apiClient == nullptr || reply == nullptr) {
+        return false;
+    }
+
+    if (!isPrimaryQuizForgeUrl(m_apiClient->baseUrl())) {
+        return false;
+    }
+
+    const int statusCode = reply
+        ->attribute(QNetworkRequest::HttpStatusCodeAttribute)
+        .toInt();
+    const bool serverLooksDown = statusCode >= 500;
+    const auto error = reply->error();
+    const bool connectionFailed =
+        error == QNetworkReply::ConnectionRefusedError ||
+        error == QNetworkReply::RemoteHostClosedError ||
+        error == QNetworkReply::HostNotFoundError ||
+        error == QNetworkReply::TimeoutError ||
+        error == QNetworkReply::TemporaryNetworkFailureError ||
+        error == QNetworkReply::SslHandshakeFailedError ||
+        error == QNetworkReply::UnknownNetworkError;
+
+    if (!serverLooksDown && !connectionFailed) {
+        return false;
+    }
+
+    const QUrl fallbackUrl = AppConfig::fallbackApiBaseUrl();
+    m_apiClient->setBaseUrl(fallbackUrl);
+
+    if (m_apiBaseUrlEdit != nullptr) {
+        m_apiBaseUrlEdit->setText(fallbackUrl.toString());
+    }
+
+    updateApiStatus();
+    statusBar()->showMessage(
+        QStringLiteral("Main website did not respond. Trying fallback website..."),
+        5000
+    );
+    return true;
 }
 
 // Quiz setup and gameplay flow
@@ -2634,6 +2712,12 @@ void MainWindow::handleLogin()
         const QByteArray payload = reply->readAll();
 
         if (reply->error() != QNetworkReply::NoError) {
+            if (switchToFallbackApi(reply)) {
+                reply->deleteLater();
+                handleLogin();
+                return;
+            }
+
             m_lastSyncMessage = QStringLiteral("Sign-in failed: %1").arg(extractReplyError(reply, payload));
             statusBar()->showMessage(m_lastSyncMessage, 5000);
             updateProfileUi();
@@ -2775,6 +2859,12 @@ void MainWindow::refreshRemoteStats()
         const QByteArray payload = reply->readAll();
 
         if (reply->error() != QNetworkReply::NoError) {
+            if (switchToFallbackApi(reply)) {
+                reply->deleteLater();
+                refreshRemoteStats();
+                return;
+            }
+
             m_lastSyncMessage = QStringLiteral("Stats refresh failed: %1").arg(extractReplyError(reply, payload));
             updateProfileUi();
             reply->deleteLater();
@@ -2898,6 +2988,12 @@ void MainWindow::refreshCommunityQuizzes()
         const QByteArray payload = reply->readAll();
 
         if (reply->error() != QNetworkReply::NoError) {
+            if (switchToFallbackApi(reply)) {
+                reply->deleteLater();
+                refreshCommunityQuizzes();
+                return;
+            }
+
             m_communityStatusLabel->setText(
                 QStringLiteral("Could not load shared quizzes: %1")
                     .arg(extractReplyError(reply, payload))
@@ -3015,6 +3111,12 @@ void MainWindow::loadCommunityQuiz(const QString &slug, bool startImmediately)
         const QByteArray payload = reply->readAll();
 
         if (reply->error() != QNetworkReply::NoError) {
+            if (switchToFallbackApi(reply)) {
+                reply->deleteLater();
+                loadCommunityQuiz(trimmedSlug, startImmediately);
+                return;
+            }
+
             m_communityStatusLabel->setText(
                 QStringLiteral("Could not open that quiz: %1")
                     .arg(extractReplyError(reply, payload))
@@ -3126,6 +3228,12 @@ void MainWindow::refreshLeaderboard()
         const QByteArray payload = reply->readAll();
 
         if (reply->error() != QNetworkReply::NoError) {
+            if (switchToFallbackApi(reply)) {
+                reply->deleteLater();
+                refreshLeaderboard();
+                return;
+            }
+
             updateLeaderboardStatus(
                 QStringLiteral("Leaderboard refresh failed: %1").arg(extractReplyError(reply, payload))
             );
@@ -3227,6 +3335,12 @@ void MainWindow::uploadLastResult()
         const QByteArray payload = reply->readAll();
 
         if (reply->error() != QNetworkReply::NoError) {
+            if (switchToFallbackApi(reply)) {
+                reply->deleteLater();
+                uploadLastResult();
+                return;
+            }
+
             m_quizUploadStatusLabel->setText(
                 QStringLiteral("Upload failed: %1").arg(extractReplyError(reply, payload))
             );
