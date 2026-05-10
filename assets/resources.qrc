@@ -2,5 +2,22 @@
     <qresource prefix="/">
         <file>app.ico</file>
         <file alias="data/sample_questions.json">../data/sample_questions.json</file>
+        <file alias="profile-avatars/20001.png">profile-avatars/20001.png</file>
+        <file alias="profile-avatars/20002.png">profile-avatars/20002.png</file>
+        <file alias="profile-avatars/20008.png">profile-avatars/20008.png</file>
+        <file alias="profile-avatars/20009.png">profile-avatars/20009.png</file>
+        <file alias="profile-avatars/2000a.png">profile-avatars/2000a.png</file>
+        <file alias="profile-avatars/2000b.png">profile-avatars/2000b.png</file>
+        <file alias="profile-avatars/2000c.png">profile-avatars/2000c.png</file>
+        <file alias="profile-avatars/20405.png">profile-avatars/20405.png</file>
+        <file alias="profile-avatars/21019.png">profile-avatars/21019.png</file>
+        <file alias="profile-avatars/21020.png">profile-avatars/21020.png</file>
+        <file alias="profile-avatars/cat.png">profile-avatars/cat.png</file>
+        <file alias="profile-avatars/chess.png">profile-avatars/chess.png</file>
+        <file alias="profile-avatars/dog.png">profile-avatars/dog.png</file>
+        <file alias="profile-avatars/drip.png">profile-avatars/drip.png</file>
+        <file alias="profile-avatars/duck.png">profile-avatars/duck.png</file>
+        <file alias="profile-avatars/red flower.png">profile-avatars/red flower.png</file>
+        <file alias="profile-avatars/snowflake.png">profile-avatars/snowflake.png</file>
     </qresource>
 </RCC>

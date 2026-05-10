@@ -11,18 +11,18 @@ namespace {
 
 QPalette buildPalette()
 {
-    // Keep the dark palette centralized so the whole widgets app picks up the same base theme.
+    // Keep the dark Aero palette centralized so dialogs and native widgets match the app shell.
     QPalette palette;
-    palette.setColor(QPalette::Window, QColor(10, 14, 20));
-    palette.setColor(QPalette::WindowText, QColor(235, 241, 248));
-    palette.setColor(QPalette::Base, QColor(20, 28, 39));
-    palette.setColor(QPalette::AlternateBase, QColor(26, 35, 48));
-    palette.setColor(QPalette::ToolTipBase, QColor(18, 24, 34));
-    palette.setColor(QPalette::ToolTipText, QColor(235, 241, 248));
-    palette.setColor(QPalette::Text, QColor(235, 241, 248));
-    palette.setColor(QPalette::Button, QColor(22, 31, 43));
-    palette.setColor(QPalette::ButtonText, QColor(235, 241, 248));
-    palette.setColor(QPalette::Highlight, QColor(97, 188, 255));
+    palette.setColor(QPalette::Window, QColor(21, 24, 28));
+    palette.setColor(QPalette::WindowText, QColor(242, 244, 246));
+    palette.setColor(QPalette::Base, QColor(32, 36, 42));
+    palette.setColor(QPalette::AlternateBase, QColor(43, 48, 54));
+    palette.setColor(QPalette::ToolTipBase, QColor(39, 43, 49));
+    palette.setColor(QPalette::ToolTipText, QColor(242, 244, 246));
+    palette.setColor(QPalette::Text, QColor(242, 244, 246));
+    palette.setColor(QPalette::Button, QColor(68, 74, 82));
+    palette.setColor(QPalette::ButtonText, QColor(242, 244, 246));
+    palette.setColor(QPalette::Highlight, QColor(185, 195, 204));
     palette.setColor(QPalette::HighlightedText, QColor(255, 255, 255));
     return palette;
 }
