@@ -1,146 +1,1470 @@
 [
   {
-    "id": "science-001",
-    "category": "Science",
+    "id": "physics-001",
+    "category": "Physics",
     "difficulty": "easy",
-    "question": "What is the chemical formula for water?",
-    "answers": ["CO2", "H2O", "NaCl", "O2"],
-    "correctIndex": 1,
-    "explanation": "Water is made of two hydrogen atoms and one oxygen atom, written as H2O."
-  },
-  {
-    "id": "science-002",
-    "category": "Science",
-    "difficulty": "medium",
-    "question": "What planet is known as the Red Planet?",
-    "answers": ["Earth", "Mars", "Jupiter", "Venus"],
-    "correctIndex": 1,
-    "explanation": "Mars appears red because of iron oxide on its surface."
-  },
-  {
-    "id": "science-003",
-    "category": "Science",
-    "difficulty": "hard",
-    "question": "Which unit is used to measure electrical resistance?",
-    "answers": ["Volt", "Watt", "Ohm", "Ampere"],
+    "question": "What is the unit of force?",
+    "answers": [
+      "Joule",
+      "Watt",
+      "Newton",
+      "Pascal"
+    ],
     "correctIndex": 2,
-    "explanation": "Electrical resistance is measured in ohms, named after Georg Ohm."
+    "explanation": "The correct answer is Newton."
+  },
+  {
+    "id": "physics-002",
+    "category": "Physics",
+    "difficulty": "easy",
+    "question": "Which force pulls objects toward Earth?",
+    "answers": [
+      "Magnetic force",
+      "Friction",
+      "Gravity",
+      "Tension"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Gravity."
+  },
+  {
+    "id": "physics-003",
+    "category": "Physics",
+    "difficulty": "easy",
+    "question": "What is the speed of light in a vacuum?",
+    "answers": [
+      "3 x 10^6 m/s",
+      "3 x 10^8 m/s",
+      "3 x 10^10 m/s",
+      "3 x 10^4 m/s"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is 3 x 10^8 m/s."
+  },
+  {
+    "id": "physics-004",
+    "category": "Physics",
+    "difficulty": "easy",
+    "question": "Which state of matter has a fixed volume but no fixed shape?",
+    "answers": [
+      "Solid",
+      "Liquid",
+      "Gas",
+      "Plasma"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Liquid."
+  },
+  {
+    "id": "physics-005",
+    "category": "Physics",
+    "difficulty": "easy",
+    "question": "What type of energy is stored in a stretched spring?",
+    "answers": [
+      "Kinetic energy",
+      "Thermal energy",
+      "Elastic potential energy",
+      "Chemical energy"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Elastic potential energy."
+  },
+  {
+    "id": "physics-006",
+    "category": "Physics",
+    "difficulty": "medium",
+    "question": "What is acceleration?",
+    "answers": [
+      "Change in speed",
+      "Change in velocity over time",
+      "Speed multiplied by time",
+      "Distance divided by time"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Change in velocity over time."
+  },
+  {
+    "id": "physics-007",
+    "category": "Physics",
+    "difficulty": "medium",
+    "question": "According to Newton's First Law, an object will:",
+    "answers": [
+      "Always accelerate",
+      "Stay at rest or move at constant velocity unless acted on by a force",
+      "Stop moving eventually",
+      "Move in circles"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Stay at rest or move at constant velocity unless acted on by a force."
+  },
+  {
+    "id": "physics-008",
+    "category": "Physics",
+    "difficulty": "medium",
+    "question": "What is the formula for kinetic energy?",
+    "answers": [
+      "KE = mv",
+      "KE = 1/2mv^2",
+      "KE = mgh",
+      "KE = Fd"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is KE = 1/2mv^2."
+  },
+  {
+    "id": "physics-009",
+    "category": "Physics",
+    "difficulty": "medium",
+    "question": "What happens to pressure when force increases but area stays the same?",
+    "answers": [
+      "Decreases",
+      "Increases",
+      "Stays the same",
+      "Becomes zero"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Increases."
+  },
+  {
+    "id": "physics-010",
+    "category": "Physics",
+    "difficulty": "medium",
+    "question": "What is the unit of electrical current?",
+    "answers": [
+      "Volt",
+      "Ampere",
+      "Ohm",
+      "Watt"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Ampere."
+  },
+  {
+    "id": "physics-011",
+    "category": "Physics",
+    "difficulty": "hard",
+    "question": "What is Ohm's Law?",
+    "answers": [
+      "V = IR",
+      "V = I/R",
+      "P = IV",
+      "R = IV"
+    ],
+    "correctIndex": 0,
+    "explanation": "The correct answer is V = IR."
+  },
+  {
+    "id": "physics-012",
+    "category": "Physics",
+    "difficulty": "hard",
+    "question": "What is the acceleration due to gravity on Earth (approx.)?",
+    "answers": [
+      "5 m/s^2",
+      "9.8 m/s^2",
+      "15 m/s^2",
+      "20 m/s^2"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is 9.8 m/s^2."
+  },
+  {
+    "id": "physics-013",
+    "category": "Physics",
+    "difficulty": "hard",
+    "question": "Which wave type requires a medium to travel?",
+    "answers": [
+      "Light waves",
+      "Radio waves",
+      "Sound waves",
+      "X-rays"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Sound waves."
+  },
+  {
+    "id": "physics-014",
+    "category": "Physics",
+    "difficulty": "hard",
+    "question": "What is the relationship between wavelength (lambda), frequency (f), and wave speed (v)?",
+    "answers": [
+      "v = f/lambda",
+      "v = flambda",
+      "v = lambda/f",
+      "v = f + lambda"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is v = flambda."
+  },
+  {
+    "id": "physics-015",
+    "category": "Physics",
+    "difficulty": "hard",
+    "question": "What principle explains why airplanes can fly?",
+    "answers": [
+      "Newton's Third Law only",
+      "Bernoulli's Principle",
+      "Ohm's Law",
+      "Hooke's Law"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Bernoulli's Principle."
+  },
+  {
+    "id": "biology-001",
+    "category": "Biology",
+    "difficulty": "easy",
+    "question": "What is the basic unit of life?",
+    "answers": [
+      "Atom",
+      "Cell",
+      "Tissue",
+      "Organ"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Cell."
+  },
+  {
+    "id": "biology-002",
+    "category": "Biology",
+    "difficulty": "easy",
+    "question": "Which organ pumps blood around the body?",
+    "answers": [
+      "Brain",
+      "Lungs",
+      "Heart",
+      "Liver"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Heart."
+  },
+  {
+    "id": "biology-003",
+    "category": "Biology",
+    "difficulty": "easy",
+    "question": "What gas do plants take in for photosynthesis?",
+    "answers": [
+      "Oxygen",
+      "Nitrogen",
+      "Carbon dioxide",
+      "Hydrogen"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Carbon dioxide."
+  },
+  {
+    "id": "biology-004",
+    "category": "Biology",
+    "difficulty": "easy",
+    "question": "Which part of the plant makes food?",
+    "answers": [
+      "Root",
+      "Stem",
+      "Leaf",
+      "Flower"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Leaf."
+  },
+  {
+    "id": "biology-005",
+    "category": "Biology",
+    "difficulty": "easy",
+    "question": "What is the function of red blood cells?",
+    "answers": [
+      "Fight infection",
+      "Carry oxygen",
+      "Produce hormones",
+      "Digest food"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Carry oxygen."
+  },
+  {
+    "id": "biology-006",
+    "category": "Biology",
+    "difficulty": "medium",
+    "question": "What is photosynthesis?",
+    "answers": [
+      "Breaking down food to release energy",
+      "Making food using light energy",
+      "Absorbing nutrients from soil",
+      "Breathing process in plants"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Making food using light energy."
+  },
+  {
+    "id": "biology-007",
+    "category": "Biology",
+    "difficulty": "medium",
+    "question": "Which organelle is known as the \"powerhouse of the cell\"?",
+    "answers": [
+      "Nucleus",
+      "Ribosome",
+      "Mitochondria",
+      "Chloroplast"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Mitochondria."
+  },
+  {
+    "id": "biology-008",
+    "category": "Biology",
+    "difficulty": "medium",
+    "question": "What is the role of enzymes?",
+    "answers": [
+      "Store genetic information",
+      "Speed up chemical reactions",
+      "Transport oxygen",
+      "Build cell walls"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Speed up chemical reactions."
+  },
+  {
+    "id": "biology-009",
+    "category": "Biology",
+    "difficulty": "medium",
+    "question": "What type of blood cells help fight infection?",
+    "answers": [
+      "Red blood cells",
+      "White blood cells",
+      "Platelets",
+      "Plasma"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is White blood cells."
+  },
+  {
+    "id": "biology-010",
+    "category": "Biology",
+    "difficulty": "medium",
+    "question": "What is diffusion?",
+    "answers": [
+      "Movement of water only",
+      "Movement of particles from high to low concentration",
+      "Movement of particles from low to high concentration",
+      "Active transport of molecules"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Movement of particles from high to low concentration."
+  },
+  {
+    "id": "biology-011",
+    "category": "Biology",
+    "difficulty": "hard",
+    "question": "What is the function of DNA?",
+    "answers": [
+      "Produce energy",
+      "Control body temperature",
+      "Carry genetic information",
+      "Transport oxygen"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Carry genetic information."
+  },
+  {
+    "id": "biology-012",
+    "category": "Biology",
+    "difficulty": "hard",
+    "question": "Which process produces identical daughter cells?",
+    "answers": [
+      "Meiosis",
+      "Fertilisation",
+      "Mitosis",
+      "Respiration"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Mitosis."
+  },
+  {
+    "id": "biology-013",
+    "category": "Biology",
+    "difficulty": "hard",
+    "question": "What is natural selection?",
+    "answers": [
+      "Random survival of organisms",
+      "Survival and reproduction of the fittest organisms",
+      "Humans choosing traits",
+      "Sudden genetic mutation"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Survival and reproduction of the fittest organisms."
+  },
+  {
+    "id": "biology-014",
+    "category": "Biology",
+    "difficulty": "hard",
+    "question": "Which structure controls what enters and leaves a cell?",
+    "answers": [
+      "Nucleus",
+      "Cell membrane",
+      "Cytoplasm",
+      "Mitochondria"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Cell membrane."
+  },
+  {
+    "id": "biology-015",
+    "category": "Biology",
+    "difficulty": "hard",
+    "question": "What is the main product of aerobic respiration?",
+    "answers": [
+      "Oxygen",
+      "Glucose",
+      "Carbon dioxide, water, and energy (ATP)",
+      "Lactic acid"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Carbon dioxide, water, and energy (ATP)."
+  },
+  {
+    "id": "chemistry-001",
+    "category": "Chemistry",
+    "difficulty": "easy",
+    "question": "What is the chemical symbol for water?",
+    "answers": [
+      "O2",
+      "H2O",
+      "CO2",
+      "HO"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is H2O."
+  },
+  {
+    "id": "chemistry-002",
+    "category": "Chemistry",
+    "difficulty": "easy",
+    "question": "What is the pH of a neutral solution?",
+    "answers": [
+      "0",
+      "7",
+      "14",
+      "1"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is 7."
+  },
+  {
+    "id": "chemistry-003",
+    "category": "Chemistry",
+    "difficulty": "easy",
+    "question": "Which particle has a negative charge?",
+    "answers": [
+      "Proton",
+      "Neutron",
+      "Electron",
+      "Nucleus"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Electron."
+  },
+  {
+    "id": "chemistry-004",
+    "category": "Chemistry",
+    "difficulty": "easy",
+    "question": "What gas do humans breathe in for respiration?",
+    "answers": [
+      "Carbon dioxide",
+      "Oxygen",
+      "Nitrogen",
+      "Hydrogen"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Oxygen."
+  },
+  {
+    "id": "chemistry-005",
+    "category": "Chemistry",
+    "difficulty": "easy",
+    "question": "What is the periodic table used for?",
+    "answers": [
+      "Measuring temperature",
+      "Organising elements",
+      "Mixing chemicals",
+      "Observing reactions"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Organising elements."
+  },
+  {
+    "id": "chemistry-006",
+    "category": "Chemistry",
+    "difficulty": "medium",
+    "question": "What is an atom?",
+    "answers": [
+      "A type of molecule",
+      "The smallest unit of an element",
+      "A chemical reaction",
+      "A compound"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is The smallest unit of an element."
+  },
+  {
+    "id": "chemistry-007",
+    "category": "Chemistry",
+    "difficulty": "medium",
+    "question": "What type of bond involves sharing electrons?",
+    "answers": [
+      "Ionic bond",
+      "Covalent bond",
+      "Metallic bond",
+      "Hydrogen bond"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Covalent bond."
+  },
+  {
+    "id": "chemistry-008",
+    "category": "Chemistry",
+    "difficulty": "medium",
+    "question": "What is the chemical formula for carbon dioxide?",
+    "answers": [
+      "CO",
+      "CO2",
+      "C₂O",
+      "O2C"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is CO2."
+  },
+  {
+    "id": "chemistry-009",
+    "category": "Chemistry",
+    "difficulty": "medium",
+    "question": "What happens during a chemical reaction?",
+    "answers": [
+      "Atoms are destroyed",
+      "Atoms are created",
+      "Atoms are rearranged",
+      "Nothing changes"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Atoms are rearranged."
+  },
+  {
+    "id": "chemistry-010",
+    "category": "Chemistry",
+    "difficulty": "medium",
+    "question": "What is an acid?",
+    "answers": [
+      "A substance with pH above 7",
+      "A substance that produces H+ ions in solution",
+      "A neutral substance",
+      "A solid compound"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is A substance that produces H+ ions in solution."
+  },
+  {
+    "id": "chemistry-011",
+    "category": "Chemistry",
+    "difficulty": "hard",
+    "question": "What is the relative atomic mass?",
+    "answers": [
+      "Number of protons only",
+      "Average mass of an element's isotopes",
+      "Number of neutrons",
+      "Total number of electrons"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Average mass of an element's isotopes."
+  },
+  {
+    "id": "chemistry-012",
+    "category": "Chemistry",
+    "difficulty": "hard",
+    "question": "Which of the following is an example of an exothermic reaction?",
+    "answers": [
+      "Photosynthesis",
+      "Thermal decomposition",
+      "Combustion",
+      "Electrolysis"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Combustion."
+  },
+  {
+    "id": "chemistry-013",
+    "category": "Chemistry",
+    "difficulty": "hard",
+    "question": "What is Avogadro's number?",
+    "answers": [
+      "6.02 x 10^2^3",
+      "3.00 x 10^8",
+      "1.60 x 10^-19",
+      "9.81"
+    ],
+    "correctIndex": 0,
+    "explanation": "The correct answer is 6.02 x 10^2^3."
+  },
+  {
+    "id": "chemistry-014",
+    "category": "Chemistry",
+    "difficulty": "hard",
+    "question": "What is the pH of a strong acid?",
+    "answers": [
+      "7",
+      "Above 7",
+      "Below 7 (typically 0-3)",
+      "Exactly 14"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Below 7 (typically 0-3)."
+  },
+  {
+    "id": "chemistry-015",
+    "category": "Chemistry",
+    "difficulty": "hard",
+    "question": "What type of reaction is: Acid + Base → Salt + Water?",
+    "answers": [
+      "Combustion",
+      "Neutralisation",
+      "Oxidation",
+      "Decomposition"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Neutralisation."
+  },
+  {
+    "id": "computing-001",
+    "category": "Computing",
+    "difficulty": "easy",
+    "question": "What does CPU stand for?",
+    "answers": [
+      "Central Processing Unit",
+      "Computer Personal Unit",
+      "Central Performance Utility",
+      "Control Processing Unit"
+    ],
+    "correctIndex": 0,
+    "explanation": "The correct answer is Central Processing Unit."
+  },
+  {
+    "id": "computing-002",
+    "category": "Computing",
+    "difficulty": "easy",
+    "question": "Which of the following is an input device?",
+    "answers": [
+      "Monitor",
+      "Printer",
+      "Keyboard",
+      "Speaker"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Keyboard."
+  },
+  {
+    "id": "computing-003",
+    "category": "Computing",
+    "difficulty": "easy",
+    "question": "What is the main function of RAM?",
+    "answers": [
+      "Store data permanently",
+      "Execute programs",
+      "Store data temporarily while in use",
+      "Display output"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Store data temporarily while in use."
+  },
+  {
+    "id": "computing-004",
+    "category": "Computing",
+    "difficulty": "easy",
+    "question": "Which file type is commonly used for images?",
+    "answers": [
+      ".mp3",
+      ".jpg",
+      ".exe",
+      ".txt"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is .jpg."
+  },
+  {
+    "id": "computing-005",
+    "category": "Computing",
+    "difficulty": "easy",
+    "question": "What does \"WWW\" stand for?",
+    "answers": [
+      "World Wide Web",
+      "Web World Wide",
+      "Wide Web World",
+      "World Web Wide"
+    ],
+    "correctIndex": 0,
+    "explanation": "The correct answer is World Wide Web."
+  },
+  {
+    "id": "computing-006",
+    "category": "Computing",
+    "difficulty": "medium",
+    "question": "What is an operating system?",
+    "answers": [
+      "Software that manages computer resources",
+      "A programming language",
+      "An input device"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is A programming language."
+  },
+  {
+    "id": "computing-007",
+    "category": "Computing",
+    "difficulty": "hard",
+    "question": "Which of the following is NOT a programming language?",
+    "answers": [
+      "Python",
+      "Java",
+      "HTML",
+      "Windows"
+    ],
+    "correctIndex": 3,
+    "explanation": "The correct answer is Windows."
+  },
+  {
+    "id": "computing-008",
+    "category": "Computing",
+    "difficulty": "hard",
+    "question": "What does HTTP stand for?",
+    "answers": [
+      "HyperText Transfer Protocol",
+      "High Transfer Text Protocol",
+      "Hyper Transfer Text Process",
+      "High Text Transfer Process"
+    ],
+    "correctIndex": 0,
+    "explanation": "The correct answer is HyperText Transfer Protocol."
+  },
+  {
+    "id": "computing-009",
+    "category": "Computing",
+    "difficulty": "hard",
+    "question": "What is the purpose of an IP address?",
+    "answers": [
+      "Store files",
+      "Identify devices on a network",
+      "Speed up internet",
+      "Protect against viruses"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Identify devices on a network."
+  },
+  {
+    "id": "computing-010",
+    "category": "Computing",
+    "difficulty": "hard",
+    "question": "What is \"binary\" in computing?",
+    "answers": [
+      "A number system using 0 and 1",
+      "A type of software",
+      "A hardware component",
+      "A programming language"
+    ],
+    "correctIndex": 0,
+    "explanation": "The correct answer is A number system using 0 and 1."
+  },
+  {
+    "id": "computing-011",
+    "category": "Computing",
+    "difficulty": "hard",
+    "question": "What is the time complexity of binary search?",
+    "answers": [
+      "O(n)",
+      "O(log n)",
+      "O(n^2)",
+      "O(1)"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is O(log n)."
+  },
+  {
+    "id": "computing-012",
+    "category": "Computing",
+    "difficulty": "hard",
+    "question": "Which data structure uses FIFO (First In, First Out)?",
+    "answers": [
+      "Stack",
+      "Queue",
+      "Tree",
+      "Graph"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Queue."
+  },
+  {
+    "id": "computing-013",
+    "category": "Computing",
+    "difficulty": "hard",
+    "question": "What does SQL primarily do?",
+    "answers": [
+      "Design websites",
+      "Manage and query databases",
+      "Create operating systems",
+      "Compile code"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Manage and query databases."
+  },
+  {
+    "id": "computing-014",
+    "category": "Computing",
+    "difficulty": "hard",
+    "question": "Which of the following is a symmetric encryption algorithm?",
+    "answers": [
+      "RSA",
+      "AES",
+      "ECC",
+      "SHA-256"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is AES."
+  },
+  {
+    "id": "computing-015",
+    "category": "Computing",
+    "difficulty": "hard",
+    "question": "What does \"recursion\" mean in programming?",
+    "answers": [
+      "Looping through arrays",
+      "A function calling itself",
+      "Sorting data",
+      "Debugging code"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is A function calling itself."
+  },
+  {
+    "id": "maths-001",
+    "category": "Maths",
+    "difficulty": "easy",
+    "question": "What is 7 + 5?",
+    "answers": [
+      "10",
+      "11",
+      "12",
+      "13"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is 12."
+  },
+  {
+    "id": "maths-002",
+    "category": "Maths",
+    "difficulty": "easy",
+    "question": "What is 9 x 3?",
+    "answers": [
+      "18",
+      "21",
+      "27",
+      "30"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is 27."
+  },
+  {
+    "id": "maths-003",
+    "category": "Maths",
+    "difficulty": "easy",
+    "question": "What is 15 - 4?",
+    "answers": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is 11."
+  },
+  {
+    "id": "maths-004",
+    "category": "Maths",
+    "difficulty": "easy",
+    "question": "What is 20 / 5?",
+    "answers": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is 4."
+  },
+  {
+    "id": "maths-005",
+    "category": "Maths",
+    "difficulty": "easy",
+    "question": "What is 6^2?",
+    "answers": [
+      "12",
+      "18",
+      "36",
+      "42"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is 36."
+  },
+  {
+    "id": "maths-006",
+    "category": "Maths",
+    "difficulty": "medium",
+    "question": "Solve for x: x + 7 = 12",
+    "answers": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is 5."
+  },
+  {
+    "id": "maths-007",
+    "category": "Maths",
+    "difficulty": "medium",
+    "question": "What is the area of a rectangle with length 8 and width 5?",
+    "answers": [
+      "13",
+      "40",
+      "26",
+      "45"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is 40."
+  },
+  {
+    "id": "maths-008",
+    "category": "Maths",
+    "difficulty": "medium",
+    "question": "What is 3/4 as a decimal?",
+    "answers": [
+      "0.25",
+      "0.5",
+      "0.75",
+      "1.25"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is 0.75."
+  },
+  {
+    "id": "maths-009",
+    "category": "Maths",
+    "difficulty": "medium",
+    "question": "What is the mean of 2, 4, 6, 8?",
+    "answers": [
+      "4",
+      "5",
+      "6",
+      "8"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is 5."
+  },
+  {
+    "id": "maths-010",
+    "category": "Maths",
+    "difficulty": "medium",
+    "question": "Solve for x: 2x = 10",
+    "answers": [
+      "2",
+      "5",
+      "8",
+      "10"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is 5."
+  },
+  {
+    "id": "maths-011",
+    "category": "Maths",
+    "difficulty": "hard",
+    "question": "Solve the quadratic equation: x^2 - 5x + 6 = 0",
+    "answers": [
+      "x = 1, 6",
+      "x = 2, 3",
+      "x = 3, 5",
+      "x = 1, 5"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is x = 2, 3."
+  },
+  {
+    "id": "maths-012",
+    "category": "Maths",
+    "difficulty": "hard",
+    "question": "What is the gradient of the line y = 3x + 2?",
+    "answers": [
+      "2",
+      "3",
+      "-3",
+      "5"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is 3."
+  },
+  {
+    "id": "maths-013",
+    "category": "Maths",
+    "difficulty": "hard",
+    "question": "What is the value of 2^3 x 2^2?",
+    "answers": [
+      "16",
+      "32",
+      "64",
+      "8"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is 32."
+  },
+  {
+    "id": "maths-014",
+    "category": "Maths",
+    "difficulty": "hard",
+    "question": "What is the area of a triangle with base 10 and height 6?",
+    "answers": [
+      "30",
+      "60",
+      "16",
+      "20"
+    ],
+    "correctIndex": 0,
+    "explanation": "The correct answer is 30."
+  },
+  {
+    "id": "maths-015",
+    "category": "Maths",
+    "difficulty": "hard",
+    "question": "Solve for x: 3x - 4 = 11",
+    "answers": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is 5."
+  },
+  {
+    "id": "english-001",
+    "category": "English",
+    "difficulty": "easy",
+    "question": "Which word is a noun?",
+    "answers": [
+      "Run",
+      "Happy",
+      "Dog",
+      "Quickly"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Dog."
+  },
+  {
+    "id": "english-002",
+    "category": "English",
+    "difficulty": "easy",
+    "question": "Which sentence is correct?",
+    "answers": [
+      "She go to school.",
+      "She goes to school.",
+      "She going to school.",
+      "She gone to school."
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is She goes to school.."
+  },
+  {
+    "id": "english-003",
+    "category": "English",
+    "difficulty": "easy",
+    "question": "What is the plural of \"cat\"?",
+    "answers": [
+      "Cat's",
+      "Cats",
+      "Cates",
+      "Caties"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Cats."
+  },
+  {
+    "id": "english-004",
+    "category": "English",
+    "difficulty": "easy",
+    "question": "Which word is an adjective?",
+    "answers": [
+      "Blue",
+      "Run",
+      "Eat",
+      "Jump"
+    ],
+    "correctIndex": 0,
+    "explanation": "The correct answer is Blue."
+  },
+  {
+    "id": "english-005",
+    "category": "English",
+    "difficulty": "easy",
+    "question": "Which punctuation mark ends a question?",
+    "answers": [
+      "Full stop (.)",
+      "Comma (,)",
+      "Question mark (?)",
+      "Exclamation mark (!)"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Question mark (?)."
+  },
+  {
+    "id": "english-006",
+    "category": "English",
+    "difficulty": "medium",
+    "question": "Which word is a synonym for \"happy\"?",
+    "answers": [
+      "Sad",
+      "Angry",
+      "Joyful",
+      "Tired"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Joyful."
+  },
+  {
+    "id": "english-007",
+    "category": "English",
+    "difficulty": "medium",
+    "question": "Choose the correct spelling:",
+    "answers": [
+      "Recieve",
+      "Receive",
+      "Receeve",
+      "Receve"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Receive."
+  },
+  {
+    "id": "english-008",
+    "category": "English",
+    "difficulty": "medium",
+    "question": "Identify the verb in the sentence: \"She runs every morning.\"",
+    "answers": [
+      "She",
+      "Runs",
+      "Every",
+      "Morning"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Runs."
+  },
+  {
+    "id": "english-009",
+    "category": "English",
+    "difficulty": "medium",
+    "question": "Which sentence uses the correct tense?",
+    "answers": [
+      "I am go to the shop yesterday.",
+      "I went to the shop yesterday.",
+      "I go to the shop yesterday.",
+      "I going to the shop yesterday."
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is I went to the shop yesterday.."
+  },
+  {
+    "id": "english-010",
+    "category": "English",
+    "difficulty": "medium",
+    "question": "What is the antonym of \"difficult\"?",
+    "answers": [
+      "Hard",
+      "Easy",
+      "Tough",
+      "Complicated"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Easy."
+  },
+  {
+    "id": "english-011",
+    "category": "English",
+    "difficulty": "hard",
+    "question": "Which sentence is grammatically correct?",
+    "answers": [
+      "Their going to the park.",
+      "There going to the park.",
+      "They're going to the park.",
+      "They going to the park."
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is They're going to the park.."
+  },
+  {
+    "id": "english-012",
+    "category": "English",
+    "difficulty": "hard",
+    "question": "Identify the adverb in the sentence: \"He quickly finished his work.\"",
+    "answers": [
+      "He",
+      "Quickly",
+      "Finished",
+      "Work"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Quickly."
+  },
+  {
+    "id": "english-013",
+    "category": "English",
+    "difficulty": "hard",
+    "question": "What type of word is \"although\"?",
+    "answers": [
+      "Noun",
+      "Verb",
+      "Conjunction",
+      "Adjective"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Conjunction."
+  },
+  {
+    "id": "english-014",
+    "category": "English",
+    "difficulty": "hard",
+    "question": "Choose the correct sentence:",
+    "answers": [
+      "Its raining outside.",
+      "It's raining outside.",
+      "Its' raining outside.",
+      "It raining outside."
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is It's raining outside.."
+  },
+  {
+    "id": "english-015",
+    "category": "English",
+    "difficulty": "hard",
+    "question": "What is the meaning of the word \"metaphor\"?",
+    "answers": [
+      "A comparison using \"like\" or \"as\"",
+      "A direct comparison without using \"like\" or \"as\"",
+      "A type of question",
+      "A repeated sound"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is A direct comparison without using \"like\" or \"as\"."
   },
   {
     "id": "history-001",
     "category": "History",
     "difficulty": "easy",
-    "question": "Which ancient civilization built the pyramids at Giza?",
-    "answers": ["Romans", "Greeks", "Egyptians", "Persians"],
-    "correctIndex": 2,
-    "explanation": "The pyramids at Giza were built by the ancient Egyptians."
+    "question": "Who was the first monarch of England after the Norman Conquest?",
+    "answers": [
+      "Henry VIII",
+      "William the Conqueror",
+      "Edward I"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is William the Conqueror."
   },
   {
     "id": "history-002",
     "category": "History",
-    "difficulty": "medium",
-    "question": "In which year did the Berlin Wall fall?",
-    "answers": ["1979", "1989", "1999", "2001"],
-    "correctIndex": 1,
-    "explanation": "The Berlin Wall fell in 1989, symbolizing the easing of Cold War tensions."
+    "difficulty": "hard",
+    "question": "In which year did the Great Fire of London occur?",
+    "answers": [
+      "1066",
+      "1215",
+      "1666",
+      "1815"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is 1666."
   },
   {
     "id": "history-003",
     "category": "History",
     "difficulty": "hard",
-    "question": "In what year was the Magna Carta first sealed?",
-    "answers": ["1066", "1215", "1415", "1660"],
+    "question": "Which famous document was signed in 1215?",
+    "answers": [
+      "Bill of Rights",
+      "Magna Carta",
+      "Act of Union",
+      "Domesday Book"
+    ],
     "correctIndex": 1,
-    "explanation": "The Magna Carta was first sealed in 1215 during the reign of King John."
+    "explanation": "The correct answer is Magna Carta."
   },
   {
-    "id": "geography-001",
-    "category": "Geography",
-    "difficulty": "easy",
-    "question": "What is the capital city of Canada?",
-    "answers": ["Toronto", "Vancouver", "Ottawa", "Montreal"],
-    "correctIndex": 2,
-    "explanation": "Ottawa is the capital city of Canada."
-  },
-  {
-    "id": "geography-002",
-    "category": "Geography",
-    "difficulty": "medium",
-    "question": "On which continent is the Sahara Desert located?",
-    "answers": ["Asia", "Africa", "Australia", "South America"],
-    "correctIndex": 1,
-    "explanation": "The Sahara Desert stretches across much of North Africa."
-  },
-  {
-    "id": "geography-003",
-    "category": "Geography",
+    "id": "history-004",
+    "category": "History",
     "difficulty": "hard",
-    "question": "Mount Kilimanjaro is located in which country?",
-    "answers": ["Kenya", "Ethiopia", "Tanzania", "Uganda"],
+    "question": "Who was the Queen of England during the Spanish Armada?",
+    "answers": [
+      "Queen Victoria",
+      "Mary I",
+      "Elizabeth I",
+      "Anne"
+    ],
     "correctIndex": 2,
-    "explanation": "Mount Kilimanjaro is in northeastern Tanzania."
+    "explanation": "The correct answer is Elizabeth I."
   },
   {
-    "id": "technology-001",
-    "category": "Technology",
-    "difficulty": "easy",
-    "question": "What does CPU stand for?",
-    "answers": ["Central Process Unit", "Computer Processing Utility", "Central Processing Unit", "Core Program Unit"],
-    "correctIndex": 2,
-    "explanation": "CPU stands for Central Processing Unit."
-  },
-  {
-    "id": "technology-002",
-    "category": "Technology",
-    "difficulty": "medium",
-    "question": "Who is credited with inventing the World Wide Web?",
-    "answers": ["Bill Gates", "Tim Berners-Lee", "Steve Jobs", "Linus Torvalds"],
-    "correctIndex": 1,
-    "explanation": "Tim Berners-Lee created the World Wide Web while working at CERN."
-  },
-  {
-    "id": "technology-003",
-    "category": "Technology",
+    "id": "history-005",
+    "category": "History",
     "difficulty": "hard",
-    "question": "Who created the C++ programming language?",
-    "answers": ["Bjarne Stroustrup", "James Gosling", "Guido van Rossum", "Dennis Ritchie"],
+    "question": "What was the name of the ship on which the Pilgrims travelled to America in 1620?",
+    "answers": [
+      "HMS Victory",
+      "Titanic",
+      "Mayflower",
+      "Endeavour"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Mayflower."
+  },
+  {
+    "id": "history-006",
+    "category": "History",
+    "difficulty": "medium",
+    "question": "What caused the English Civil War?",
+    "answers": [
+      "Dispute over trade",
+      "Conflict between king and Parliament",
+      "Religious war with France",
+      "Industrial disagreements"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Conflict between king and Parliament."
+  },
+  {
+    "id": "history-007",
+    "category": "History",
+    "difficulty": "medium",
+    "question": "Who was executed in 1649 during the Civil War?",
+    "answers": [
+      "Charles I",
+      "James I",
+      "Henry VII",
+      "George III"
+    ],
     "correctIndex": 0,
-    "explanation": "C++ was created by Bjarne Stroustrup at Bell Labs."
+    "explanation": "The correct answer is Charles I."
   },
   {
-    "id": "technology-004",
-    "category": "Technology",
-    "difficulty": "easy",
-    "question": "What is a single binary digit called?",
-    "answers": ["Byte", "Bit", "Node", "Pixel"],
-    "correctIndex": 1,
-    "explanation": "A bit is the smallest standard unit of digital information."
-  },
-  {
-    "id": "movies-001",
-    "category": "Movies",
+    "id": "history-008",
+    "category": "History",
     "difficulty": "medium",
-    "question": "Who directed the film Inception?",
-    "answers": ["Denis Villeneuve", "Christopher Nolan", "Ridley Scott", "James Cameron"],
+    "question": "What was the Industrial Revolution?",
+    "answers": [
+      "A political rebellion",
+      "A shift to machine-based manufacturing",
+      "A war with Europe",
+      "A religious reform"
+    ],
     "correctIndex": 1,
-    "explanation": "Inception was directed by Christopher Nolan and released in 2010."
+    "explanation": "The correct answer is A shift to machine-based manufacturing."
   },
   {
-    "id": "movies-002",
-    "category": "Movies",
-    "difficulty": "easy",
-    "question": "Which animated film features the characters Woody and Buzz Lightyear?",
-    "answers": ["Cars", "Toy Story", "Shrek", "Finding Nemo"],
-    "correctIndex": 1,
-    "explanation": "Woody and Buzz Lightyear are the central characters in Toy Story."
-  },
-  {
-    "id": "movies-003",
-    "category": "Movies",
-    "difficulty": "hard",
-    "question": "Which film won the Academy Award for Best Picture at the 2020 Oscars ceremony?",
-    "answers": ["1917", "Joker", "Parasite", "Ford v Ferrari"],
+    "id": "history-009",
+    "category": "History",
+    "difficulty": "medium",
+    "question": "Which empire was the largest in history and included Britain?",
+    "answers": [
+      "Roman Empire",
+      "Ottoman Empire",
+      "British Empire",
+      "Mongol Empire"
+    ],
     "correctIndex": 2,
-    "explanation": "Parasite won Best Picture at the Academy Awards ceremony held on February 9, 2020."
+    "explanation": "The correct answer is British Empire."
+  },
+  {
+    "id": "history-010",
+    "category": "History",
+    "difficulty": "medium",
+    "question": "What was the main purpose of the Act of Union?",
+    "answers": [
+      "End slavery",
+      "Unite England and Scotland",
+      "Declare independence",
+      "Start a war"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Unite England and Scotland."
+  },
+  {
+    "id": "history-011",
+    "category": "History",
+    "difficulty": "hard",
+    "question": "Who was the British Prime Minister during most of World War II?",
+    "answers": [
+      "Neville Chamberlain",
+      "Winston Churchill",
+      "Clement Attlee",
+      "Margaret Thatcher"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Winston Churchill."
+  },
+  {
+    "id": "history-012",
+    "category": "History",
+    "difficulty": "hard",
+    "question": "What was the significance of the Battle of Hastings?",
+    "answers": [
+      "Ended Roman rule",
+      "Norman conquest of England",
+      "Start of WWI",
+      "Union with Scotland"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Norman conquest of England."
+  },
+  {
+    "id": "history-013",
+    "category": "History",
+    "difficulty": "hard",
+    "question": "What was the main goal of the Chartist movement?",
+    "answers": [
+      "Expand empire",
+      "Improve working conditions",
+      "Gain political rights for working-class men",
+      "End monarchy"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is Gain political rights for working-class men."
+  },
+  {
+    "id": "history-014",
+    "category": "History",
+    "difficulty": "hard",
+    "question": "Which monarch reigned during the height of the British Empire?",
+    "answers": [
+      "Elizabeth I",
+      "Victoria",
+      "George VI",
+      "Edward VIII"
+    ],
+    "correctIndex": 1,
+    "explanation": "The correct answer is Victoria."
+  },
+  {
+    "id": "history-015",
+    "category": "History",
+    "difficulty": "hard",
+    "question": "What triggered Britain's involvement in World War I?",
+    "answers": [
+      "Attack on London",
+      "Alliance with the USA",
+      "German invasion of Belgium",
+      "Russian revolution"
+    ],
+    "correctIndex": 2,
+    "explanation": "The correct answer is German invasion of Belgium."
   }
 ]
